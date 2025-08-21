@@ -23,7 +23,7 @@ import ShowReview from "./ShowReview";
 import ReviewForm from "./ReviewForm";
 import axios from "../utils/axios";
 import { useParams } from "react-router-dom";
-import VillaFAQs from "./VillaFAQS";
+import VillaFAQs from "./VillaFAQs";
 import VillaRooms from "./VillaRooms";
 import PropertyBrochureModal from "./PropertyBrochureModal";
 import PropertyVideosModal from "./PropertyVideosModal";
