@@ -34,6 +34,4 @@ router.get("/get-exclusive-villa",getExclusiveVilla)
 router.get("/available-weekend", getAvailableWeekendVillas);
 router.get("/:id", getApprovedVillaById); // Approved villa by ID
 
-
-
 export default router;
