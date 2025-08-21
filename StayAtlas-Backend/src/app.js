@@ -54,6 +54,9 @@ app.use("/api/v1/offers", offerRoutes);
 // app.use('/api/v1/shareexperience', experienceRouter);
 app.use('/api/v1/payments', PaymentRouter)
 
+app.get("/", (req, res) => {
+    res.send("🚀 StayAtlas Backend is live. Visit /api/v1 for API routes.");
+  });  
 
 app.use(errorHandler);
 export { app };
