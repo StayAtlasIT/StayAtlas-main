@@ -22,7 +22,7 @@ import Profile from "./pages/Profile"
 import ViewExclusive from "./pages/ViewExclusive"
 import ExclusiveLayout from "./layout/ExclusiveLayout"
 import AdminDashboard from "./pages/AdminDashboard"
-import PropertyRequestForm from "./pages/Listform"
+import PropertyRequestForm from "./pages/ListForm"
 import AdminProtectedRoute from "./components/AdminProtectedRoute"
 import BookingDetailsPage from "./pages/BookingDetailsPage"
 import VerifyOTP from "./pages/VerifyOTP";
