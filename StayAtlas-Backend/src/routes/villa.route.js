@@ -19,7 +19,7 @@ import { parseAddressBody } from "../middlewares/parse.address.middleware.js";
 const router = express.Router();
 
 // PROTECTED ROUTES
-router.post("/create-villa", verifyJWT, canListVilla, upload.array('images',10),createVilla); // Owner can create
+router.post("/create-villa", verifyJWT, canListVilla, upload.array('images',60),createVilla); // Owner can create
 router.get("/my-villas", verifyJWT, getMyVillas);
 router.get('/recently-viewed', verifyJWT, getRecentlyViewed);
 router.put("/:id", verifyJWT, updateVilla); // Owner  can update

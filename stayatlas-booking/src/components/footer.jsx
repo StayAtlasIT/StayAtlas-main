@@ -1,11 +1,11 @@
 import React from 'react';
-import { SiWhatsapp, SiInstagram, SiFacebook } from 'react-icons/si';
+import { SiWhatsapp, SiInstagram, SiMaildotru } from 'react-icons/si';
 
 const Footer = () => {
   const socialLinks = [
     { icon: <SiWhatsapp />, link: 'https://wa.me/918591131447', label: 'WhatsApp' },
     { icon: <SiInstagram />, link: 'https://www.instagram.com/stayatlas.in', label: 'Instagram' },
-    { icon: <SiFacebook />, link: 'https://www.facebook.com/yourpage', label: 'Facebook' },
+    { icon: <SiMaildotru />, link: 'mailto:stayatlasbookings@gmail.com', label: 'Email' },
   ];
 
   const quickLinks = [
@@ -13,7 +13,7 @@ const Footer = () => {
     { text: 'Explore Villas', link: '/explore' },
     { text: 'List Your Property', link: '/list' },
     { text: 'Customer Support', link: '/chat' },
-    { text: 'About Us', link: '/about-us' },
+    // { text: 'About Us', link: '/about-us' },
     { text: 'Contact Us', link: 'https://wa.me/918591131447' },
   ];
 

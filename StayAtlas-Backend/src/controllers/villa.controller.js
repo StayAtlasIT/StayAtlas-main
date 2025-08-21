@@ -10,16 +10,21 @@ import { uploadMultipleImagesParallel } from "../utils/cloudinary.js";
 
 // Create a new villa (owners limited, admin full)
 export const createVilla = asyncHandler(async (req, res) => {
-  const files = req.files;
+  const files = req.files || [];
   const userId = req.user?._id;
 
   if (!userId) {
     throw new ApiError(401, "Unauthorized: User not authenticated");
   }
 
+  if (!Array.isArray(files) || files.length === 0) {
+    throw new ApiError(400, "At least one image is required");
+  }
+
   const localPathArray = files.map(file => file.path);
 
-  const cloudinaryResponse = await uploadMultipleImagesParallel(localPathArray);
+  // Upload concurrently with backpressure safety
+  const cloudinaryResponse = await uploadMultipleImagesParallel(localPathArray, "villa");
 
   if (cloudinaryResponse.length < req.files.length) {
     return res.status(400).json(

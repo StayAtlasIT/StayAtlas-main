@@ -137,6 +137,10 @@ export default function PropertyRequestPage() {
       toast.error(`Please upload at least ${minPhotos} photos.`);
       return;
     }
+    if (images.length > 60) {
+      toast.error("Maximum 60 images are allowed per villa.");
+      return;
+    }
 
     const finalData = { ...formData, amenities: selectedAmenities, images };
     setIsLoading(true);
@@ -157,7 +161,12 @@ export default function PropertyRequestPage() {
         }
       }
 
-      const response = await axios.post("/v1/villas/create-villa", formDataToSend);
+      const response = await axios.post("/v1/villas/create-villa", formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" },
+        maxBodyLength: Infinity,
+        maxContentLength: Infinity,
+        timeout: 120000,
+      });
       if (response.data.statusCode === 201) {
         toast.success("Villa successfully listed for review.");
         setFormData(initialFormData);
@@ -300,7 +309,9 @@ export default function PropertyRequestPage() {
 
               {/* Photos */}
               <div>
-                <label className="block text-gray-700 font-medium mb-2">Photos</label>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Photos <span className="text-sm text-gray-500">(Minimum {minPhotos}, Maximum 60)</span>
+                </label>
                 <input
                   type="file"
                   name="images"
