@@ -72,19 +72,23 @@ export const uploadOnCloudinary = (input, type = "villa") => {
 
 
 const uploadMultipleImagesParallel = async (filePaths = [], type) => {
-    const uploadPromises = filePaths.map(path => uploadOnCloudinary(path, type));
-    const results = await Promise.allSettled(uploadPromises);
-
+    // Chunk uploads to reduce memory spikes when many files are sent
+    const concurrency = 3;
     const successfulUploads = [];
     const failedFilePaths = [];
 
-    results.forEach((result, index) => {
-        if (result.status === "fulfilled" && result.value) {
-            successfulUploads.push(result.value);
-        } else {
-            failedFilePaths.push(filePaths[index]);
-        }
-    });
+    for (let i = 0; i < filePaths.length; i += concurrency) {
+        const chunk = filePaths.slice(i, i + concurrency);
+        const results = await Promise.allSettled(chunk.map(path => uploadOnCloudinary(path, type)));
+
+        results.forEach((result, idx) => {
+            if (result.status === "fulfilled" && result.value) {
+                successfulUploads.push(result.value);
+            } else {
+                failedFilePaths.push(chunk[idx]);
+            }
+        });
+    }
 
     if (failedFilePaths.length > 0) {
         console.log(`Retrying ${failedFilePaths.length} failed uploads...`);
