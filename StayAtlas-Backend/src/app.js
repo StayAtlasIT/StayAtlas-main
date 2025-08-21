@@ -25,6 +25,11 @@ app.use((err, req, res, next) => {
     });
 });
 
+// ✅ Health check route (for Render & monitoring)
+app.get("/healthz", (req, res) => {
+    res.status(200).json({ status: "ok" });
+});
+
 //import routes
 import userRouter from "./routes/user.route.js";
 import villaRoutes from './routes/villa.route.js';
