@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '../components/footer'
-import ExclusiveHeader from '../components/exclusiveHeader'
+import ExclusiveHeader from '../components/ExclusiveHeader'
 
 const ExclusiveLayout = () => {
   return (
