@@ -23,7 +23,7 @@ const Booking = () => {
  useEffect(() => {
   const fetchReviewStats = async () => {
     try {
-      const res = await axios.get("/reviews/villa-review-stats");
+      const res = await axios.get("/v1/reviews/villa-review-stats");
       setReviewStats(res.data.data || []);
     } catch (error) {
       console.error("Failed to fetch review stats", error);
@@ -42,7 +42,7 @@ const Booking = () => {
     async function fetchBooking(){
       try{
         console.log(id)
-        const {data} = await axios.get(`/villas/${id}`)
+        const {data} = await axios.get(`/v1/villas/${id}`)
         if(data.statusCode!==200){
           toast.error("No Booking Data Found")
           setProperty({})
