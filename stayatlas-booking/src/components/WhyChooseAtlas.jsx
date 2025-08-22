@@ -54,8 +54,17 @@ const WhyChooseAtlas = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-14">
-          <h2 className="font-serif text-3xl sm:text-4xl font-black mb-3">
-            Why Choose StayAtlas
+          <h2
+            className="font-bold text-gray-800 mb-3 bg-gradient-to-r from-green-400 via-green-500 to-green-700 bg-clip-text text-transparent"
+            style={{ fontSize: "28px" }} // mobile font size
+          >
+            <span className="block md:hidden">Why Choose StayAtlas</span>
+            <span
+              className="hidden md:block"
+              style={{ fontSize: "39px" }} // desktop & tablet font size
+            >
+              Why Choose StayAtlas
+            </span>
           </h2>
           <p className="text-base md:text-md text-gray-600 max-w-2xl mx-auto">
             We're committed to providing exceptional villa rental experiences with unmatched service, 
@@ -71,7 +80,7 @@ const WhyChooseAtlas = () => {
               className="group border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-white/90 backdrop-blur-md"
             >
               <CardContent className="p-6 text-center">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mb-4 group-hover:scale-105 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-full mb-4 group-hover:scale-105 transition-transform duration-300">
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
 
@@ -86,26 +95,6 @@ const WhyChooseAtlas = () => {
             </Card>
           ))}
         </div>
-
-        {/* Stats */}
-        {/* <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-6 bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl px-6 py-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-500">100+</div>
-              <div className="text-sm text-gray-600">Premium Villas</div>
-            </div>
-            <div className="w-px h-10 bg-gray-300"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-teal-500">50K+</div>
-              <div className="text-sm text-gray-600">Happy Guests</div>
-            </div>
-            <div className="w-px h-10 bg-gray-300"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-orange-500">4.6★</div>
-              <div className="text-sm text-gray-600">Average Rating</div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </section>
   );

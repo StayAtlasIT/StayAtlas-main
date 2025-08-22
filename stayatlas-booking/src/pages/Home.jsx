@@ -100,14 +100,14 @@ const Home = () => {
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                 } text-center lg:text-left mx-auto`}>
                   <h1 className="text-5xl lg:text-6xl font-black leading-tight">
-                    <span className="block">Unleash Your</span>
+                    <span className="block">Find Your</span>
                     <span className="block bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
-                      Wanderlust
+                      Next Escape
                     </span>
                   </h1>
-                  <h2 className="text-2xl font-bold text-amber-300">Book Your Next Journey</h2>
+                  <h2 className="text-2xl font-bold text-amber-300">Begin Your Journey Here</h2>
                   <p className="text-lg text-gray-200 max-w-lg mx-auto lg:mx-0">
-                    Crafting Exceptional Journeys: Your Global Escape Planner.
+                    Beyond Destinations, We Create Experiences.
                   </p>
                   
                   {/* Start Exploring Button */}

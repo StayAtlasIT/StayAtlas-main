@@ -5,13 +5,12 @@ import { Phone, Mail, MapPin, Send, Clock, MessageCircle } from "lucide-react";
 import axios from "axios";
 
 const ContactSection = () => {
-const [formData, setFormData] = useState({
-  fullName: "",
-  email: "",
-  mobile: "",
-  message: "",
-});
-
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    mobile: "",
+    message: "",
+  });
 
   const [loading, setLoading] = useState(false);
 
@@ -109,7 +108,7 @@ const [formData, setFormData] = useState({
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <item.icon className="w-6 h-6 text-white" />
                         </div>
                       </div>
@@ -131,29 +130,29 @@ const [formData, setFormData] = useState({
             </div>
 
             {/* Additional Info */}
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-yellow-50 to-orange-50">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-green-50 to-green-100">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <MessageCircle className="w-6 h-6 text-orange-500" />
+                  <MessageCircle className="w-6 h-6 text-green-600" />
                   <h3 className="text-xl font-semibold text-gray-900">
                     Why Contact Us?
                   </h3>
                 </div>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
                     <span>Personalized villa recommendations</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
                     <span>Special deals and exclusive offers</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
                     <span>24/7 booking assistance</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
                     <span>Travel planning and concierge services</span>
                   </li>
                 </ul>
@@ -176,27 +175,24 @@ const [formData, setFormData] = useState({
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  
-                    <div>
-  <label
-    htmlFor="fullName"
-    className="block text-sm font-medium text-gray-700 mb-2"
-  >
-    Full Name
-  </label>
-  <input
-    type="text"
-    id="fullName"
-    name="fullName"
-    value={formData.fullName}
-    onChange={handleInputChange}
-    required
-    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 bg-white"
-    placeholder="Enter your full name"
-  />
-</div>
-
-            
+                  <div>
+                    <label
+                      htmlFor="fullName"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 bg-white"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
 
                   <div>
                     <label
@@ -212,7 +208,7 @@ const [formData, setFormData] = useState({
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -231,7 +227,7 @@ const [formData, setFormData] = useState({
                       name="mobile"
                       value={formData.mobile}
                       onChange={(e) => {
-                        const value = e.target.value.replace(/\D/g, ""); // sirf digits allow
+                        const value = e.target.value.replace(/\D/g, ""); // digits only
                         if (value.length <= 10) {
                           setFormData({ ...formData, mobile: value });
                         }
@@ -239,7 +235,7 @@ const [formData, setFormData] = useState({
                       required
                       minLength={10}
                       maxLength={10}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 bg-white"
                       placeholder="Enter your Phone number"
                     />
                   </div>
@@ -258,16 +254,16 @@ const [formData, setFormData] = useState({
                       onChange={handleInputChange}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 bg-white resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 bg-white resize-none"
                       placeholder="Tell us about your dream villa experience..."
                     />
                   </div>
 
                   <button
                     type="submit"
-                    disabled={loading} // 🔹 Button disable during loading
-                    className={`w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold py-4 px-6 rounded-lg 
-              hover:from-yellow-500 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 
+                    disabled={loading}
+                    className={`w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-4 px-6 rounded-lg 
+              hover:from-green-500 hover:to-green-700 transform hover:scale-105 transition-all duration-300 
               flex items-center justify-center space-x-2 ${
                 loading ? "opacity-70 cursor-not-allowed" : ""
               }`}
@@ -305,7 +301,7 @@ const [formData, setFormData] = useState({
                     By submitting this form, you agree to our{" "}
                     <a
                       href="/privacy-policy"
-                      className="text-orange-500 hover:text-orange-600 font-medium"
+                      className="text-green-600 hover:text-green-700 font-medium"
                     >
                       Privacy Policy
                     </a>
