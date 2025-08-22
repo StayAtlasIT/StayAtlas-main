@@ -112,7 +112,7 @@ const Exclusive = () => {
   useEffect(() => {
     const fetchAllExclusiveVillas = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/villas/get-exclusive-villa");
+        const res = await axios.get("/v1/villas/get-exclusive-villa");
         setAllVillas(res.data.data);
       } catch (err) {
         console.error("Failed to fetch exclusive villas:", err.message);

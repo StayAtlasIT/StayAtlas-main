@@ -12,7 +12,7 @@ const HorizontalVillas = () => {
   useEffect(() => {
     const fetchVillas = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/villas/get-exclusive-villa");
+        const res = await axios.get("/v1/villas/get-exclusive-villa");
         setVillas(res.data.data); // ✅ set state here
       } catch (err) {
         console.error("Failed to fetch exclusive villa:", err.message);

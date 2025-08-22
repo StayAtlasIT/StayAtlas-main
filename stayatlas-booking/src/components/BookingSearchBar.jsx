@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "@/utils/axios";
 
 const locations = ["Goa", "Jaipur", "Mumbai", "Delhi", "Manali", "Udaipur"];
 
@@ -50,28 +51,19 @@ export default function BookingBar({ onResults }) {
     }
 
     try {
-      const res = await fetch("/api/v1/villas/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          location,
-          checkIn: checkIn.toISOString(),
-          checkOut: checkOut.toISOString(),
-          guests, 
-          // >>> MISSING PART 3: PASS nights IN REQUEST BODY
-          nights, 
-        }),
+      const { data } = await axios.post("/v1/villas/search", {
+        location,
+        checkIn: checkIn.toISOString(),
+        checkOut: checkOut.toISOString(),
+        guests,
+        nights,
       });
 
-      if (!res.ok) throw new Error("Something went wrong");
-
-      const data = await res.json();
       console.log("Villas Found:", data);
 
-      // >>> MISSING PART 4: PASS nights TO onResults CALLBACK
-      if (onResults) onResults(data, nights); 
+      // Pass results + nights back up
+      if (onResults) onResults(data, nights);
+
       setIsExpanded(false);
     } catch (error) {
       console.error("Search failed:", error.message);
