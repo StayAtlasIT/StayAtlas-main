@@ -115,7 +115,7 @@ const VilaDetail = ({ property = null }) => {
   useEffect(() => {
     const fetchVilla = async () => {
       try {
-        const res = await axios.get(`/v1/villas/${id}`);
+        const res = await axios.get(`/villas/${id}`);
         setData({ villa: res.data.data });
       } catch (error) {
         console.error("Failed to fetch villa details", error);
@@ -129,7 +129,7 @@ const VilaDetail = ({ property = null }) => {
   useEffect(() => {
     const fetchReviewStats = async () => {
       try {
-        const res = await axios.get("/v1/reviews/villa-review-stats");
+        const res = await axios.get("/reviews/villa-review-stats");
         setReviewStats(res.data.data || []);
         setLoading(false);
       } catch (error) {
@@ -146,7 +146,7 @@ const VilaDetail = ({ property = null }) => {
 
   const fetchReview = async () => {
     try {
-      const res = await axios.get(`/v1/reviews/villa/${data?.villa?._id}`);
+      const res = await axios.get(`/reviews/villa/${data?.villa?._id}`);
       setAllReviews(res.data.data);
     } catch (error) {
       console.error("Failed to fetch all reviews", error);
@@ -480,7 +480,7 @@ const VilaDetail = ({ property = null }) => {
         villaId={data?.villa?._id}
         onClose={() => setShowReview(false)}
         onReviewSubmitted={async () => {
-          const res = await axios.get(`/v1/villas/${id}`);
+          const res = await axios.get(`/villas/${id}`);
           setData({ villa: res.data.data });
           fetchReview();
         }}

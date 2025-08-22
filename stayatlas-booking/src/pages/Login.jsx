@@ -36,7 +36,7 @@ export default function Login() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `/v1/users/forgot-password`,
+        `/users/forgot-password`,
         { email: resetEmail }
       );
       toast.success(response.data?.message || "Reset link sent to your email");
@@ -64,7 +64,7 @@ export default function Login() {
     if (Object.keys(newErrors).length === 0) {
       setLoading(true);
       try {
-        const response = await axios.post(`/v1/users/login`, form);
+        const response = await axios.post(`/users/login`, form);
         const { data } = response;
         if (data.statusCode === 200) {
           dispatch(setUser(data.data.user));
@@ -88,7 +88,7 @@ export default function Login() {
   useEffect(() => {
     const fetchEmail = async () => {
       try {
-        const res = await axios.post("/v1/users/email-by-phone", {
+        const res = await axios.post("/users/email-by-phone", {
           phoneNumber: form.phoneNumber,
         });
         const userEmail = res.data?.email;
@@ -132,7 +132,7 @@ export default function Login() {
   const handleGoogleLogin = () => {
     const googleAuthUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
     googleAuthUrl.searchParams.append('client_id', import.meta.env.VITE_GOOGLE_CLIENT_ID);
-    googleAuthUrl.searchParams.append('redirect_uri', `${import.meta.env.VITE_BACKEND_URL}/v1/users/google-callback`);
+    googleAuthUrl.searchParams.append('redirect_uri', `${import.meta.env.VITE_BACKEND_URL}/users/google-callback`);
     googleAuthUrl.searchParams.append('response_type', 'code');
     googleAuthUrl.searchParams.append('scope', 'openid email profile');
     googleAuthUrl.searchParams.append('access_type', 'offline');
