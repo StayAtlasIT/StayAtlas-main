@@ -82,6 +82,11 @@ const villaSchema = new mongoose.Schema(
             type: Number
         },
 
+        numberOfBathrooms: {
+            type: Number,
+            default: 0
+        },
+
         guestCapacity: {
             type: Number,
             default: function() {

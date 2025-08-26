@@ -354,6 +354,7 @@ const VillaManagement = () => {
       villaName: villa.villaName || "",
       propertyType: villa.propertyType || "",
       numberOfRooms: villa.numberOfRooms || "",
+      numberOfBathrooms: villa.numberOfBathrooms || 0,
       guestCapacity: villa.guestCapacity || "" (villa.numberOfRooms ? villa.numberOfRooms * 2 : 0), 
       email: villa.email || "",
       phoneNumber: villa.phoneNumber || "",

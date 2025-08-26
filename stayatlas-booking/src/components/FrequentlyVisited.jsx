@@ -90,7 +90,7 @@ const VillaCard = ({ property}) => {
           </div>
           <div className="flex items-center">
             <Bath className="h-3 w-3 mr-1" />
-            <span>{property.numberOfRooms || '0'}</span>
+            <span>{property.numberOfBathrooms || '0'}</span>
           </div>
         </div>
         

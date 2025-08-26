@@ -233,7 +233,7 @@ const VilaDetail = ({ property = null }) => {
               <FaPersonWalkingLuggage /> {property.guestCapacity || (property.numberOfRooms * 2)} MAX GUEST
             </div>
             <div className="flex items-center gap-2 border px-3 py-1 rounded-full text-sm">
-              <DoorClosed /> {property.numberOfRooms} ROOMS
+              <DoorClosed /> {property.numberOfBathrooms || 0} Bathrooms
             </div>
           </div>
 

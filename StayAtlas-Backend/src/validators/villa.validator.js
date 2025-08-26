@@ -19,6 +19,7 @@ export const OwnerVillaSchema = z.object({
     .optional(),
   email: z.string().email().optional(),
   numberOfRooms: z.string().optional(),
+  numberOfBathrooms: z.coerce.number().min(0, { message: "Number of bathrooms must be 0 or more" }).optional(),
   guestCapacity: z.coerce.number().min(1, { message: "Guest capacity must be at least 1" }).optional(),
   images: z.array(z.string()).min(2),
   address: AddressSchema,

@@ -10,6 +10,7 @@ import {
   Check,
   Menu,
   X,
+  Heart,
 } from "lucide-react";
 import { useEffect } from "react";
 import NotificationBell from "./NotificationBell";
@@ -46,6 +47,8 @@ export default function UserProfile() {
   })
   const [showPassword, setShowPassword] = useState(false);
   const [openEditProfile, setOpenEditProfile] = useState(false);
+  const [likedVillas, setLikedVillas] = useState([]);
+  const [loadingLikedVillas, setLoadingLikedVillas] = useState(false);
 
 
   // useEffect(() => {
@@ -130,6 +133,25 @@ export default function UserProfile() {
     }
   };
 
+  const fetchLikedVillas = async () => {
+    setLoadingLikedVillas(true);
+    try {
+      const { data } = await axios.get("/v1/users/liked-villas", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (data?.success) {
+        setLikedVillas(data?.likedVillasData || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch liked villas", error);
+      setLikedVillas([]);
+    } finally {
+      setLoadingLikedVillas(false);
+    }
+  };
+
   useEffect(() => {
     if (activeTab === "bookings") {
       const fetchBookings = async () => {
@@ -145,6 +167,8 @@ export default function UserProfile() {
       };
 
       fetchBookings();
+    } else if (activeTab === "liked") {
+      fetchLikedVillas();
     }
   }, [activeTab, bookingTab]);
 
@@ -234,8 +258,27 @@ export default function UserProfile() {
                     My Bookings
                   </span>
                 </div>
-              </div>
 
+                <div
+                  className={`flex items-center p-4 cursor-pointer ${
+                    activeTab === "liked"
+                      ? "bg-teal-50 border-l-4 border-teal-600"
+                      : ""
+                  }`}
+                  onClick={() => setActiveTab("liked")}
+                >
+                  <Heart className="text-teal-600 mr-3" size={20} />
+                  <span
+                    className={
+                      activeTab === "liked"
+                        ? "font-medium text-teal-600"
+                        : "text-gray-700"
+                    }
+                  >
+                    Liked Villas
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div className="md:w-3/4">
@@ -584,6 +627,81 @@ export default function UserProfile() {
                             </div>
                           </div>
                         ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Liked Villas Tab */}
+              {activeTab === "liked" && (
+                <div className="bg-white rounded-lg shadow p-6">
+                  <h3 className="text-xl font-bold mb-4">Liked Villas</h3>
+
+                  {loadingLikedVillas ? (
+                    <div className="flex justify-center items-center py-8">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+                    </div>
+                  ) : likedVillas.length === 0 ? (
+                    <div className="text-center py-8">
+                      <Heart className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                      <p className="text-gray-500 text-lg">No liked villas yet</p>
+                      <p className="text-gray-400 text-sm mt-2">
+                        Start exploring and like your favorite villas!
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {likedVillas.map((villa) => (
+                        <div
+                          key={villa._id}
+                          className="border rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                        >
+                          <Link to={`/booking/${villa._id}`}>
+                            <img
+                              src={villa.images?.[0]}
+                              alt={villa.villaName}
+                              className="w-full h-48 object-cover cursor-pointer hover:opacity-90 transition"
+                            />
+                          </Link>
+
+                          <div className="p-4">
+                            <h4 className="font-semibold text-lg mb-2">
+                              {villa.villaName}
+                            </h4>
+
+                            <div className="flex items-center mb-2">
+                              <MapPin className="h-4 w-4 text-gray-500 mr-1" />
+                              <p className="text-sm text-gray-600">
+                                {villa.address?.city}, {villa.address?.state}
+                              </p>
+                            </div>
+
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center">
+                                <span className="text-yellow-500">★</span>
+                                <span className="text-sm text-gray-600 ml-1">
+                                  {villa.averageRating || 0} ({villa.reviewCount || 0} reviews)
+                                </span>
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                {villa.numberOfRooms} rooms • {villa.guestCapacity} guests
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between">
+                              <div className="text-lg font-semibold text-teal-600">
+                                ₹{villa.pricePerNightBoth?.weekday || 'N/A'}/night
+                              </div>
+                              <Link
+                                to={`/booking/${villa._id}`}
+                                className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 text-sm"
+                              >
+                                View Details
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>

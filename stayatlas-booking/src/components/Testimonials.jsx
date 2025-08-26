@@ -96,7 +96,7 @@ const Testimonials = () => {
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-900 to-green-900 rounded-full mb-4">
             <Quote className="w-6 h-6 text-white" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -113,11 +113,11 @@ const Testimonials = () => {
           className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 relative overflow-hidden transform transition-all duration-700 ease-in-out opacity-0 translate-y-4 animate-fadeSlide"
         >
           {/* Background Pattern */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-100 to-cyan-100 rounded-full translate-y-12 -translate-x-12 opacity-50"></div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-900 to-green-900 rounded-full -translate-y-16 translate-x-16 opacity-50"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-green-900 to-green-900 rounded-full translate-y-12 -translate-x-12 opacity-50"></div>
           
           <div className="relative z-10">
-            <div className="text-5xl text-purple-200 mb-4">"</div>
+            <div className="text-5xl text-green-900 mb-4">"</div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
               {/* Guest Info */}
               <div className="text-center lg:text-left">
@@ -133,7 +133,7 @@ const Testimonials = () => {
                   <Calendar className="w-3 h-3" />
                   <span className="text-xs">{currentTestimonial.date}</span>
                 </div>
-                <div className="inline-flex items-center gap-1 bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-medium">
+                <div className="inline-flex items-center gap-1 bg-purple-100 text-green-900 px-2 py-0.5 rounded-full text-xs font-medium">
                   {currentTestimonial.tripType}
                 </div>
               </div>

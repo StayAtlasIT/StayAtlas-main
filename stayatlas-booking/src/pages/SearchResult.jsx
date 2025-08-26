@@ -447,6 +447,7 @@ const safeVilla = {
   name: villa?.villaName || 'Property Name',
   location: `${villa?.address?.city || ''}, ${villa?.address?.state || ''}`,
   rooms: villa?.numberOfRooms || 0,
+  baths: villa?.numberOfBathrooms || 0,
   price: villa?.pricePerNightBoth?.weekday || 0,
   discountPercent: villa?.discountPercent || 0,
   description: villa?.description || 'No description available',

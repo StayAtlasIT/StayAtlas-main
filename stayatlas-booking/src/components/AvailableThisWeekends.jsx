@@ -108,7 +108,7 @@ const Card = ({ villa }) => {
             <FaPersonWalkingLuggage /> {villa.guestCapacity || (villa.numberOfRooms * 2)} Guests
           </div>
           <div className="flex items-center gap-1 border px-2 py-0.5 rounded-full bg-gray-50">
-            <DoorClosed size={14} /> {villa.numberOfRooms} Rooms
+          <DoorClosed size={14} /> {villa.numberOfBathrooms || 0} Bathrooms
           </div>
         </div>
 

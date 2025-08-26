@@ -672,9 +672,27 @@ export const deleteUser = asyncHandler(async (req, res) => {
 
 const getLikedVillas = asyncHandler(async (req, res) => {
     const userId = req.user._id;
-    const liked = await VillaLike.find({ user: userId });
-    const likedVillas = liked.map(like => like.villa.toString());
-    return res.status(200).json({ success: true, likedVillas });
+    const liked = await VillaLike.find({ user: userId }).populate({
+        path: 'villa',
+        match: {
+            approvalStatus: 'approved',
+            isDeleted: { $ne: true }
+        },
+        select: 'villaName images address amenities pricePerNightBoth averageRating reviewCount numberOfRooms guestCapacity propertyType'
+    });
+
+    // Filter out null villas (deleted or unapproved)
+    const validLikedVillas = liked.filter(like => like.villa !== null);
+
+    // For backward compatibility, also return just the IDs
+    const likedVillaIds = validLikedVillas.map(like => like.villa._id.toString());
+    const likedVillasData = validLikedVillas.map(like => like.villa);
+
+    return res.status(200).json({
+        success: true,
+        likedVillas: likedVillaIds,
+        likedVillasData: likedVillasData
+    });
 });
 
 const getCookieOptions = () => {

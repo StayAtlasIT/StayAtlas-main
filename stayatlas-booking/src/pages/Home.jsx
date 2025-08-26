@@ -146,46 +146,6 @@ const Home = () => {
                     </button>
                   </div>
                 </div>
-
-                {/* Right Floating Images */}
-                <div className="hidden lg:flex flex-col animate-fade-in-right">
-                  <div className="flex gap-4 justify-center">
-                    {/* Image 1 */}
-                    <div className="group relative">
-                      <div className="w-56 h-44 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-2xl transform group-hover:scale-105 transition-all">
-                        <img 
-                          src={heroImage1}
-                          alt="Room 1"
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                        />
-                      </div>
-                      <div className="absolute bottom-2 left-2 text-white px-3 py-1 rounded text-sm"></div>
-                    </div>
-                    {/* Image 2 */}
-                    <div className="group relative">
-                      <div className="w-44 h-56 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-2xl transform group-hover:scale-105 transition-all">
-                        <img 
-                          src={heroImage2}
-                          alt="Room 2"
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                        />
-                      </div>
-                      <span className="absolute bottom-2 left-2  text-white px-3 py-1 rounded text-sm"></span>
-                    </div>
-                  </div>
-
-                  {/* Bottom Floating */}
-                  <div className="group relative flex justify-center mt-4">
-                    <div className="w-72 h-36 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-2xl transform group-hover:scale-105 transition-all">
-                      <img 
-                        src={heroImage3}
-                        alt="Room 3"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform"
-                      />
-                    </div>
-                    <span className="absolute bottom-2 left-2 text-white px-3 py-1 rounded text-sm"></span>
-                  </div>
-                </div>
               </div>
 
               {/* Search Bar placement */}

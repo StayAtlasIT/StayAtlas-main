@@ -55,7 +55,7 @@ const WhyChooseAtlas = () => {
         {/* Header */}
         <div className="text-center mb-12 md:mb-14">
           <h2
-            className="font-bold text-gray-800 mb-3 bg-gradient-to-r from-green-400 via-green-500 to-green-700 bg-clip-text text-transparent"
+            className="font-bold text-gray-800 mb-3 bg-gradient-to-r from-green-900 via-green-900 to-green-900 bg-clip-text text-transparent"
             style={{ fontSize: "28px" }} // mobile font size
           >
             <span className="block md:hidden">Why Choose StayAtlas</span>
@@ -80,7 +80,7 @@ const WhyChooseAtlas = () => {
               className="group border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-white/90 backdrop-blur-md"
             >
               <CardContent className="p-6 text-center">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-full mb-4 group-hover:scale-105 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-900 to-green-900 rounded-full mb-4 group-hover:scale-105 transition-transform duration-300">
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
 
