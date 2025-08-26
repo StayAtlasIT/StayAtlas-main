@@ -452,8 +452,7 @@ function ExclusivePropertyCard({ villa, nights = 1, isCompact = false }) {
             </a>
             {/* Rooms and Guests */}
             <div className="text-xs md:text-sm text-gray-700 flex gap-2 sm:gap-3 md:gap-6 flex-wrap mb-2 sm:mb-3">
-              <span>Upto {safeVilla.rooms * 2} Guests</span>
-              <span>
+            <span>Upto {villa?.guestCapacity || (safeVilla.rooms * 2)} Guests</span>              <span>
                 <FaBed className="inline mr-1" /> {safeVilla.rooms} Rooms
               </span>
               <span>

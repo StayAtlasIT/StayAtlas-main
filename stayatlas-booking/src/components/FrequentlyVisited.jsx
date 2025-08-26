@@ -82,7 +82,7 @@ const VillaCard = ({ property}) => {
         <div className="flex items-center justify-between text-xs text-gray-600 bg-gray-50 rounded-lg p-2">
           <div className="flex items-center">
             <Users className="h-3 w-3 mr-1" />
-                  <span>Upto {property.numberOfRooms * 2 || 0} Guests</span>
+              <span>Upto {property.guestCapacity || (property.numberOfRooms * 2) || 0} Guests</span>
           </div> 
           <div className="flex items-center">
             <Bed className="h-3 w-3 mr-1" />

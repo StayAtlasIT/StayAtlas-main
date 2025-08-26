@@ -93,6 +93,18 @@ export const ReviewModal = ({
                 />
               </div>
               <div>
+                <label className="block text-sm font-medium mb-1">Total Guest</label>
+                <input
+                  type="number"
+                  name="guestCapacity"
+                  value={editedVilla.guestCapacity || ''}
+                  onChange={handleInputChange}
+                  min="1"
+                  placeholder="Enter maximum guest capacity"
+                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <div>
                 <label className="block text-sm font-medium mb-1">Email</label>
                 <input
                   type="email"

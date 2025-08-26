@@ -494,7 +494,7 @@ const {
                   <div className=" pb-2">
                     <span className="inline-flex items-center gap-1 bg-gray-100 text-gray-800 px-2.5 py-1 rounded text-sm font-medium w-fit">
                       <FaPersonWalkingLuggage className="text-base" />
-                      {villa.numberOfRooms * 2} Max Guest
+                      {villa.guestCapacity || (villa.numberOfRooms * 2)} Max Guest
                     </span>
                   </div>
 

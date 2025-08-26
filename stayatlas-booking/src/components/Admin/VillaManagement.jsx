@@ -105,6 +105,10 @@ const VillaManagement = () => {
               <p className="font-medium">{villa.numberOfRooms}</p>
             </div>
             <div>
+              <p className="text-sm text-gray-500">Max Guests</p>
+              <p className="font-medium">{villa.guestCapacity || (villa.numberOfRooms * 2)}</p>
+            </div>
+            <div>
               <p className="text-sm text-gray-500">Villa Type</p>
               <p className="text-md font-semibold">
                 {villa.isExclusive ? "Exclusive" : "Explore"}
@@ -350,6 +354,7 @@ const VillaManagement = () => {
       villaName: villa.villaName || "",
       propertyType: villa.propertyType || "",
       numberOfRooms: villa.numberOfRooms || "",
+      guestCapacity: villa.guestCapacity || "" (villa.numberOfRooms ? villa.numberOfRooms * 2 : 0), 
       email: villa.email || "",
       phoneNumber: villa.phoneNumber || "",
       address: {
@@ -400,6 +405,11 @@ const VillaManagement = () => {
             sanitizedValue || 0
           ),
         },
+      }));
+    } else if (name === "guestCapacity") {
+      setEditedVilla((prev) => ({
+        ...prev,
+        [name]: Number(value) || 0,
       }));
     } else {
       setEditedVilla((prev) => ({

@@ -33,6 +33,7 @@ const initialFormData = {
   email: "",
   phoneNumber: "",
   numberOfRooms: "",
+  guestCapacity: "",
   propertyType: "",
   address: {
     street: "",
@@ -219,7 +220,8 @@ export default function PropertyRequestPage() {
                   { name: "villaName", placeholder: "Villa Name *", type: "text" },
                   { name: "email", placeholder: "Email ID *", type: "email" },
                   { name: "phoneNumber", placeholder: "Mobile Phone *", type: "tel" },
-                  { name: "numberOfRooms", placeholder: "Number of Rooms *", type: "number" }
+                  { name: "numberOfRooms", placeholder: "Number of Rooms *", type: "number" },
+                  { name: "guestCapacity", placeholder: "Total Guest *", type: "number"}
                 ].map((field) => (
                   <input
                     key={field.name}

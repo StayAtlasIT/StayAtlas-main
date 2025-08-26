@@ -88,7 +88,7 @@ const calculateBookingCharges = (
 
   const extraChargeTaken = 1000;
   const totalPeople = adults + children;
-  const allowedPeople = property.numberOfRooms * 2;
+  const allowedPeople = property.guestCapacity || (property.numberOfRooms * 2);
   const extraPeople = Math.max(0, totalPeople - allowedPeople);
   const additionalCharges = extraPeople * extraChargeTaken;
 

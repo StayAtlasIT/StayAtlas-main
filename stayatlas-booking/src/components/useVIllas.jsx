@@ -315,7 +315,7 @@ function UseExclusive({ villa, nights = 1 }) {
           </a>
 
           <div className="text-sm text-gray-700 flex items-center justify-between mb-3">
-            <span>Upto {safeVilla.rooms * 2} Guests</span>
+            <span>Upto {safeVilla?.guestCapacity || (safeVilla.rooms * 2)} Guests</span>
             <div className="flex gap-3">
               <span className="flex items-center gap-1">
                 <FaBed size={14} /> {safeVilla.rooms}

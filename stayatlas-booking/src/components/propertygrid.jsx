@@ -407,7 +407,7 @@ export default function PropertyListingGrid({
               <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                 <div className="flex items-center gap-1">
                   <span>👥</span>
-                  <span>Upto {property.numberOfRooms * 2 || 0} Guests</span>
+                  <span>Upto {property.guestCapacity || (property.numberOfRooms * 2) || 0} Guests</span>                
                 </div>
                 <div className="flex items-center gap-1">
                   <span>🏠</span>

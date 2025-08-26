@@ -488,26 +488,21 @@ export const searchVillas = async (req, res) => {
 
     console.log("📌 Pre-filtered Villas Query:", filters);
 
-    // Step 4: Fetch all matching villas first
-    let villas = await Villa.find(filters).lean();
+    // Step 4: Add guest capacity filter to the database query
+    if (guests) {
+      filters.$or = [
+        { guestCapacity: { $gte: Number(guests) } },
+        {
+          $and: [
+            { guestCapacity: { $exists: false } },
+            { numberOfRooms: { $gte: Math.ceil(Number(guests) / 2) } }
+          ]
+        }
+      ];
+    }
 
-    // Step 5: Guests filter (runtime calculation from rooms array)
-    // if (guests) {
-    //   villas = villas.filter(villa => {
-    //     let totalGuests = 0;
-    //     if (villa.rooms && villa.rooms.length > 0) {
-    //       villa.rooms.forEach(room => {
-    //         if (room.guests) {
-    //           const match = room.guests.match(/(\d+)/g);
-    //           if (match) {
-    //             totalGuests += match.reduce((sum, num) => sum + Number(num), 0);
-    //           }
-    //         }
-    //       });
-    //     }
-    //     return totalGuests >= Number(guests);
-    //   });
-    // }
+    // Step 5: Fetch all matching villas
+    let villas = await Villa.find(filters).lean();
 
     console.log(`✅ Found ${villas.length} villas after guests filter`);
     res.json(villas);
