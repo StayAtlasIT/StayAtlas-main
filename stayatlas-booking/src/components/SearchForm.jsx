@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, CalendarDays, Users, Search, X, Minus, Plus } from "lucide-react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { cities } from '@/utils/countriesCities';
+import axios from '@/utils/axios';
 
 
 // Simple DatePicker component since react-date-range might not work in artifacts
@@ -238,8 +239,45 @@ const allCities = Object.entries(cities).flatMap(([state, cityList]) =>
   cityList.map(city => ({ city, state }))
 );
 
+// Live suggestions state
+const [remoteSuggestions, setRemoteSuggestions] = useState([]);
+
+// Debounced fetch for suggestions when user types
+useEffect(() => {
+  const term = (query || '').trim();
+  if (activeSection !== 'destination') return; // only when destination popover is open
+  if (term.length < 2) {
+    setRemoteSuggestions([]);
+    return;
+  }
+  let cancelled = false;
+  const t = setTimeout(async () => {
+    try {
+      const res = await axios.get('/v1/villas/suggestions', { params: { q: term } });
+      if (!cancelled) {
+        const data = Array.isArray(res.data?.data) ? res.data.data : [];
+        setRemoteSuggestions(data.map(s => ({ id: s.id, city: s.city || '', state: s.state || '', villaName: s.villaName || undefined })));
+      }
+    } catch (e) {
+      if (!cancelled) setRemoteSuggestions([]);
+    }
+  }, 250);
+  return () => { cancelled = true; clearTimeout(t); };
+}, [query, activeSection]);
+
+// Merge static cities with remote villa suggestions (dedupe)
+const mergedLocations = React.useMemo(() => {
+  const keyOf = (loc) => `${(loc.id||'')}:${(loc.villaName||'').toLowerCase()}|${(loc.city||'').toLowerCase()}|${(loc.state||'').toLowerCase()}`;
+  const map = new Map();
+  [...allCities, ...remoteSuggestions].forEach(loc => {
+    const k = keyOf(loc);
+    if (!map.has(k)) map.set(k, loc);
+  });
+  return Array.from(map.values());
+}, [allCities, remoteSuggestions]);
+
 const filteredCities = query
-  ? allCities.filter(loc =>
+  ? mergedLocations.filter(loc =>
       (loc.villaName
         ? `${loc.villaName} - ${loc.city}, ${loc.state}`
         : `${loc.city}, ${loc.state}`
@@ -247,7 +285,7 @@ const filteredCities = query
         .toLowerCase()
         .includes(query.toLowerCase())
     )
-  : allCities;
+  : mergedLocations;
 
 
 
@@ -566,7 +604,12 @@ if (isMobile) {
         <button
           key={idx}
           onClick={() => {
-            // Set selected as villaName if exists, otherwise city
+            // If live villa suggestion has an id, go straight to villa page
+            if (loc.id && loc.villaName) {
+              navigate(`/booking/${loc.id}`);
+              return;
+            }
+            // Otherwise treat as location selection
             setSelected(
               loc.villaName
                 ? `${loc.villaName} - ${loc.city}, ${loc.state}`
@@ -967,7 +1010,10 @@ if (isMobile) {
       <button
         key={idx}
         onClick={() => {
-          // Set selected as villaName if exists, else city/state
+          if (loc.id && loc.villaName) {
+            navigate(`/booking/${loc.id}`);
+            return;
+          }
           setSelected(
             loc.villaName
               ? `${loc.villaName} - ${loc.city}, ${loc.state}`

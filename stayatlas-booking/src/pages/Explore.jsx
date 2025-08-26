@@ -35,10 +35,10 @@ const Explore = () => {
     useEffect(() => {
       const params = new URLSearchParams(location.search);
       
-      // Update search state from URL parameters
+      // Update search state from URL parameters (align with SearchForm: start/end)
       if (params.has("location")) setSearchLocation(params.get("location"));
-      if (params.has("checkIn")) setSearchCheckIn(new Date(params.get("checkIn")));
-      if (params.has("checkOut")) setSearchCheckOut(new Date(params.get("checkOut")));
+      if (params.has("start")) setSearchCheckIn(new Date(params.get("start")));
+      if (params.has("end")) setSearchCheckOut(new Date(params.get("end")));
       if (params.has("guests")) setSearchGuests(parseInt(params.get("guests")));
       if (params.has("rooms")) {
         setSearchRooms(parseInt(params.get("rooms")));
@@ -46,9 +46,9 @@ const Explore = () => {
       }
   
       // Calculate nights if both dates are present
-      if (params.has("checkIn") && params.has("checkOut")) {
-        const checkIn = new Date(params.get("checkIn"));
-        const checkOut = new Date(params.get("checkOut"));
+      if (params.has("start") && params.has("end")) {
+        const checkIn = new Date(params.get("start"));
+        const checkOut = new Date(params.get("end"));
         const nightsDiff = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
         setNights(nightsDiff || 1);
       }
@@ -57,8 +57,8 @@ const Explore = () => {
     // Handle search from SearchForm
     const handleSearch = (searchData) => {
       setSearchLocation(searchData.location || "");
-      setSearchCheckIn(searchData.checkIn || null);
-      setSearchCheckOut(searchData.checkOut || null);
+      setSearchCheckIn(searchData.checkIn ? new Date(searchData.checkIn) : null);
+      setSearchCheckOut(searchData.checkOut ? new Date(searchData.checkOut) : null);
       setSearchGuests(searchData.guests || 1);
       setSearchRooms(searchData.rooms || 1);
       
@@ -67,7 +67,7 @@ const Explore = () => {
       
       // Calculate nights
       if (searchData.checkIn && searchData.checkOut) {
-        const nightsDiff = Math.ceil((searchData.checkOut - searchData.checkIn) / (1000 * 60 * 60 * 24));
+        const nightsDiff = Math.ceil((new Date(searchData.checkOut) - new Date(searchData.checkIn)) / (1000 * 60 * 60 * 24));
         setNights(nightsDiff || 1);
       }
     };
@@ -77,11 +77,19 @@ const Explore = () => {
       const applySearchFilters = () => {
         let filtered = [...allVillas];
   
-        // Filter by location (city)
+        // Filter by location or villa name
         if (searchLocation?.trim()) {
-          filtered = filtered.filter(villa => 
-            villa.address?.city?.toLowerCase().includes(searchLocation.toLowerCase())
-          );
+          const needle = searchLocation.toLowerCase();
+          filtered = filtered.filter(villa => {
+            const haystack = [
+              villa.name,
+              villa.villaName,
+              villa.address?.city,
+              villa.address?.state,
+              villa.address?.fullAddress
+            ].filter(Boolean).join(' ').toLowerCase();
+            return haystack.includes(needle);
+          });
         }
   
         // Filter by number of rooms

@@ -16,6 +16,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import SearchForm from "@/components/SearchForm";
 import FilterSidebar from "@/components/FilterSidebar";
+import SortButton from "@/components/Sort";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -107,6 +108,7 @@ export default function SearchResult() {
 
     const [allVillas, setAllVillas] = useState([]); // Store all villas
     const [nights, setNights] = useState(1);
+    const [sortOption, setSortOption] = useState('newly_listed'); // Default sort option
     const location = useLocation();
 
       // Search state
@@ -170,6 +172,36 @@ export default function SearchResult() {
        }
      };
    
+     // Sort villas based on the selected option
+     const sortVillas = (villasToSort, option) => {
+       if (!villasToSort || villasToSort.length === 0) return [];
+       
+       const sortedVillas = [...villasToSort];
+       
+       switch (option) {
+         case 'price_low_high':
+           return sortedVillas.sort((a, b) => (a.pricePerNight || 0) - (b.pricePerNight || 0));
+         case 'price_high_low':
+           return sortedVillas.sort((a, b) => (b.pricePerNight || 0) - (a.pricePerNight || 0));
+         case 'top_rated':
+           return sortedVillas.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+         case 'newly_listed':
+         default:
+           // Sort by createdAt date (newest first) or fallback to default order
+           return sortedVillas.sort((a, b) => {
+             if (!a.createdAt && !b.createdAt) return 0;
+             if (!a.createdAt) return 1;
+             if (!b.createdAt) return -1;
+             return new Date(b.createdAt) - new Date(a.createdAt);
+           });
+       }
+     };
+
+     // Handle sort change
+     const handleSortChange = (sortValue) => {
+       setSortOption(sortValue);
+     };
+     
      // Apply search filters to all villas
      useEffect(() => {
        const applySearchFilters = () => {
@@ -216,12 +248,17 @@ export default function SearchResult() {
              return true;
            });
          }
+         
+         // Apply sorting
+         if (sortOption) {
+           filtered = sortVillas(filtered, sortOption);
+         }
    
          setVillas(filtered);
        };
    
        applySearchFilters();
-     }, [allVillas, searchLocation, searchCheckIn, searchCheckOut, searchGuests, searchRooms]);
+     }, [allVillas, searchLocation, searchCheckIn, searchCheckOut, searchGuests, searchRooms, sortOption]);
    
      // Handlers
      const handleAmenityChange = (amenity) =>
@@ -320,8 +357,11 @@ export default function SearchResult() {
   )}
 </div>
 
-         {/* Mobile Layout */}
-         <div className="lg:hidden p-4">
+{/* Mobile Layout */}
+          <div className="lg:hidden p-4">
+            <div className="flex justify-end mb-4">
+              <SortButton onSortChange={handleSortChange} />
+            </div>
            <FilterSidebar isMobile={true} {...filterProps} />
            <div className="mt-4">
              {filteredVillas.length === 0 ? (
@@ -355,6 +395,9 @@ export default function SearchResult() {
              
            {/* Right: Villa Cards */}
            <div className="w-3/4">
+             <div className="flex justify-end mb-4">
+               <SortButton onSortChange={handleSortChange} />
+             </div>
              {filteredVillas.length === 0 ? (
                <p className="text-center text-gray-500 text-lg mt-10">
                  No villas found. Please search again.
@@ -716,20 +759,39 @@ const handleLike = async () => {
           )}
         </div>
 
-        {/* Carousel Dots */}
-        {safeVilla.image.length > 1 && (
-          <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
-            {safeVilla.image.map((_, idx) => (
+        {/* Carousel Dots - Always show exactly 3 dots */}
+        <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
+          {/* Always show exactly 3 dots regardless of how many images */}
+          {[0, 1, 2].map((dotIndex) => {
+            // Calculate which dot should be active based on current image index
+            const totalImages = Math.max(safeVilla.image.length, 1);
+            let isActive = false;
+            
+            if (totalImages <= 1) {
+              // If there's only one image, highlight the first dot
+              isActive = dotIndex === 0;
+            } else if (totalImages === 2) {
+              // If there are two images, highlight first or second dot
+              isActive = dotIndex === currentImageIndex && dotIndex < 2;
+            } else {
+              // For 3+ images
+              isActive = 
+                (dotIndex === 0 && currentImageIndex === 0) || 
+                (dotIndex === 1 && currentImageIndex > 0 && currentImageIndex < totalImages - 1) || 
+                (dotIndex === 2 && currentImageIndex === totalImages - 1);
+            }
+            
+            return (
               <span
-                key={idx}
+                key={dotIndex}
                 className={`block w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-200 ${
-                  idx === currentImageIndex ? "bg-white border border-[#002B20] scale-125" : "bg-gray-300"
+                  isActive ? "bg-white border border-[#002B20] scale-125" : "bg-gray-300"
                 }`}
-                style={{ boxShadow: idx === currentImageIndex ? "0 0 4px #002B20" : "none" }}
+                style={{ boxShadow: isActive ? "0 0 4px #002B20" : "none" }}
               />
-            ))}
-          </div>
-        )}
+            );
+          })}
+        </div>
 
         {/* Prev / Next Buttons */}
         {safeVilla.image.length > 1 && (

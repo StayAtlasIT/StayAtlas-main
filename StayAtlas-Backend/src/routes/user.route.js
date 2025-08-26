@@ -44,7 +44,9 @@ router.route("/google-callback").get(handleGoogleOAuthCallback);
 // Secured routes (require verifyJWT middleware)
 router.route("/getuser").get(verifyJWT,getUser)
 router.route("/logout").post(verifyJWT,logoutUser)
-router.route("/refreshToken").post(verifyJWT,refreshAccessToken)
+// Allow refreshing without a valid access token (uses refreshToken cookie/body)
+//router.route("/refreshToken").post(verifyJWT,refreshAccessToken)
+router.route("/refreshToken").post(refreshAccessToken)
 router.route("/changePassword").post(verifyJWT,changeCurrentPassword)
 router.route("/change-name").post(verifyJWT,updateUserName)
 router.route("/profile/edit").post(verifyJWT,editProfile);

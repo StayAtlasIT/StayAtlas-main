@@ -372,20 +372,39 @@ function ExclusivePropertyCard({ villa, nights = 1, isCompact = false }) {
             )}
           </div>
 
-          {/* Carousel Dots */}
-          {safeVilla.image.length > 1 && (
-            <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
-              {safeVilla.image.map((_, idx) => (
+          {/* Carousel Dots - Always show exactly 3 dots */}
+          <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
+            {/* Always show exactly 3 dots regardless of how many images */}
+            {[0, 1, 2].map((dotIndex) => {
+              // Calculate which dot should be active based on current image index
+              const totalImages = Math.max(safeVilla.image.length, 1);
+              let isActive = false;
+              
+              if (totalImages <= 1) {
+                // If there's only one image, highlight the first dot
+                isActive = dotIndex === 0;
+              } else if (totalImages === 2) {
+                // If there are two images, highlight first or second dot
+                isActive = dotIndex === currentImageIndex && dotIndex < 2;
+              } else {
+                // For 3+ images
+                isActive = 
+                  (dotIndex === 0 && currentImageIndex === 0) || 
+                  (dotIndex === 1 && currentImageIndex > 0 && currentImageIndex < totalImages - 1) || 
+                  (dotIndex === 2 && currentImageIndex === totalImages - 1);
+              }
+              
+              return (
                 <span
-                  key={idx}
+                  key={dotIndex}
                   className={`block w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-200 ${
-                    idx === currentImageIndex ? "bg-white border border-[#002B20] scale-125" : "bg-gray-300"
+                    isActive ? "bg-white border border-[#002B20] scale-125" : "bg-gray-300"
                   }`}
-                  style={{ boxShadow: idx === currentImageIndex ? "0 0 4px #002B20" : "none" }}
+                  style={{ boxShadow: isActive ? "0 0 4px #002B20" : "none" }}
                 />
-              ))}
-            </div>
-          )}
+              );
+            })}
+          </div>
 
           {/* Prev / Next Buttons */}
           {safeVilla.image.length > 1 && (

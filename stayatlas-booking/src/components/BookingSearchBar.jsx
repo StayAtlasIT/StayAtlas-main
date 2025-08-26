@@ -33,8 +33,8 @@ export default function BookingBar({ onResults }) {
 
   // Update total guests when adults/children/infants change (Good to have)
   useEffect(() => {
-    setGuests(adults + children + infants);
-  }, [adults, children, infants]);
+    setGuests(adults + children);
+  }, [adults, children]);
 
   const handleLocationChange = (e) => {
     const input = e.target.value;
@@ -200,8 +200,9 @@ export default function BookingBar({ onResults }) {
                 onClick={() => setShowGuestDropdown(!showGuestDropdown)}
                 className="p-2 border border-gray-300 rounded-md cursor-pointer"
               >
-                {adults + children + infants} Guest
-                {adults + children + infants > 1 ? "s" : ""}
+                {adults + children} Guest
+                {adults + children > 1 ? "s" : ""}
+                {infants > 0 ? ` • ${infants} Infant${infants > 1 ? "s" : ""}` : ""}
               </div>
 
               {showGuestDropdown && (

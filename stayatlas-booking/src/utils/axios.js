@@ -25,5 +25,4 @@ axios.interceptors.request.use((config) => {
 });
 
 // axios.defaults.headers.common['Content-Type'] = 'application/json';
-
 export default axios;

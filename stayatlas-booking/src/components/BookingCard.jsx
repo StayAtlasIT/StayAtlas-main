@@ -87,7 +87,7 @@ const calculateBookingCharges = (
   const gstAmount = (gst / 100) * costAfterDiscount;
 
   const extraChargeTaken = 1000;
-  const totalPeople = adults + children + pets;
+  const totalPeople = adults + children;
   const allowedPeople = property.numberOfRooms * 2;
   const extraPeople = Math.max(0, totalPeople - allowedPeople);
   const additionalCharges = extraPeople * extraChargeTaken;
@@ -432,7 +432,7 @@ const BookingCard = ({ property }) => {
               >
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-gray-600" />
-                  <span>{adults + children + pets} Guests</span>
+                  <span>{adults + children} Guests {pets > 0 ? `• ${pets} Pets` : ''}</span>
                 </div>
                 <ChevronDown className="w-4 h-4 text-gray-500" />
               </div>

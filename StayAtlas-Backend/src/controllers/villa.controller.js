@@ -516,3 +516,54 @@ export const searchVillas = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// Lightweight suggestions for search dropdown
+// GET /api/v1/villas/suggestions?q=term
+export const getVillaSuggestions = asyncHandler(async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    const query = (q || "").trim();
+
+    const match = query
+      ? {
+          approvalStatus: "approved",
+          isDeleted: { $ne: true },
+          $or: [
+            { villaName: { $regex: query, $options: "i" } },
+            { "address.city": { $regex: query, $options: "i" } },
+            { "address.state": { $regex: query, $options: "i" } },
+            {
+              $expr: {
+                $regexMatch: {
+                  input: { $concat: ["$address.city", ", ", "$address.state"] },
+                  regex: query,
+                  options: "i",
+                },
+              },
+            },
+          ],
+        }
+      : {
+          approvalStatus: "approved",
+          isDeleted: { $ne: true },
+        };
+
+    const villas = await Villa.find(match)
+      .select("villaName address.city address.state _id")
+      .limit(15)
+      .lean();
+
+    const suggestions = villas.map((v) => ({
+      id: v._id?.toString?.() || v._id,
+      villaName: v.villaName,
+      city: v.address?.city || "",
+      state: v.address?.state || "",
+    }));
+
+    return res.status(200).json(new ApiResponse(200, suggestions, "Villa suggestions fetched"));
+  } catch (error) {
+    console.error("Error in getVillaSuggestions:", error);
+    return res.status(500).json(new ApiResponse(500, [], "Failed to fetch suggestions"));
+  }
+});

@@ -10,6 +10,7 @@ import {
   getRecentlyViewed,
   getAvailableWeekendVillas,
   searchVillas,
+  getVillaSuggestions,
 } from "../controllers/villa.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/multer.middleware.js";
@@ -27,6 +28,7 @@ router.delete("/:id", verifyJWT, deleteVilla); // Owner can delete
 
 // GET: /api/v1/villas/search?location=Mumbai&start=2025-08-15&end=2025-08-18&guests=4
 router.get("/search", searchVillas);
+router.get("/suggestions", getVillaSuggestions);
 
 // PUBLIC ROUTES - No authentication required
 router.get("/", getAllApprovedVillas); // All approved and non-deleted villas

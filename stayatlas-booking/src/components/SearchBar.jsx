@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { cities } from '@/utils/countriesCities';
+import axios from '@/utils/axios';
 
 // Custom CSS for DatePicker
 const datePickerStyles = `
@@ -306,7 +307,43 @@ const SearchForm = () => {
 });
 
 
-const filteredLocationsDesktop = cityStateList.filter((loc) => {
+// Remote live suggestions for villas and locations
+const [remoteSuggestions, setRemoteSuggestions] = useState([]);
+
+// Debounced fetch for suggestions
+useEffect(() => {
+  const term = (locationDesktop || locationMobile || '').trim();
+  if (term.length < 2) {
+    setRemoteSuggestions([]);
+    return;
+  }
+  let cancelled = false;
+  const timer = setTimeout(async () => {
+    try {
+      const res = await axios.get('/v1/villas/suggestions', { params: { q: term } });
+      if (!cancelled) {
+        const data = Array.isArray(res.data?.data) ? res.data.data : [];
+        setRemoteSuggestions(data.map(s => ({ id: s.id, city: s.city || '', state: s.state || '', villaName: s.villaName || undefined })));
+      }
+    } catch (e) {
+      if (!cancelled) setRemoteSuggestions([]);
+    }
+  }, 250);
+  return () => { cancelled = true; clearTimeout(timer); };
+}, [locationDesktop, locationMobile]);
+
+// Merge static city/state with remote villa suggestions
+const mergedLocations = React.useMemo(() => {
+  const keyOf = (loc) => `${(loc.id||'')}:${(loc.villaName||'').toLowerCase()}|${(loc.city||'').toLowerCase()}|${(loc.state||'').toLowerCase()}`;
+  const map = new Map();
+  [...cityStateList, ...remoteSuggestions].forEach(loc => {
+    const k = keyOf(loc);
+    if (!map.has(k)) map.set(k, loc);
+  });
+  return Array.from(map.values());
+}, [remoteSuggestions]);
+
+const filteredLocationsDesktop = mergedLocations.filter((loc) => {
   const searchTerm = locationDesktop.toLowerCase();
   return (
     loc.city.toLowerCase().includes(searchTerm) ||
@@ -315,7 +352,7 @@ const filteredLocationsDesktop = cityStateList.filter((loc) => {
   );
 });
 
-const filteredLocationsMobile = cityStateList.filter((loc) => {
+const filteredLocationsMobile = mergedLocations.filter((loc) => {
   const searchTerm = locationMobile.toLowerCase();
   return (
     loc.city.toLowerCase().includes(searchTerm) ||
@@ -327,7 +364,7 @@ const filteredLocationsMobile = cityStateList.filter((loc) => {
 
 const handleSelectLocationDesktop = (loc) => {
   const displayName = loc.villaName
-    ? `${loc.villaName} - ${loc.city}, ${loc.state}`
+    ? `${loc.villaName}`
     : `${loc.city}, ${loc.state}`;
 
   setLocationDesktop(displayName);
@@ -476,6 +513,15 @@ const handleSearch = () => {
   // Convert dates to ISO format so backend can parse
   const startISO = checkIn ? new Date(checkIn).toISOString() : "";
   const endISO = checkOut ? new Date(checkOut).toISOString() : "";
+
+  // If a remote suggestion with villa id was selected, navigate directly to its detail page
+  const selectedRemote = remoteSuggestions.find(s => {
+    if (!location) return false;
+    const candidate = s.villaName ? `${s.villaName}` : `${s.city}, ${s.state}`;
+    return candidate.toLowerCase() === location.toLowerCase();
+  });
+
+  // NOTE: Do not hard-redirect to detail; allow Search page to list by name
 
   // Navigate to search page with query params
   navigate(
@@ -670,9 +716,7 @@ const handleSearch = () => {
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4 text-emerald-600" />
             <span className="text-gray-700 text-sm font-medium">
-              {loc.villaName
-                ? `${loc.villaName} - ${loc.city}, ${loc.state}`
-                : `${loc.city}, ${loc.state}`}
+              {loc.villaName ? `${loc.villaName}` : `${loc.city}, ${loc.state}`}
             </span>
           </div>
           {!loc.villaName && (
@@ -1003,9 +1047,7 @@ const handleSearch = () => {
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4 text-emerald-600" />
             <span className="text-gray-700 text-sm font-medium">
-              {loc.villaName
-                ? `${loc.villaName} - ${loc.city}, ${loc.state}`
-                : `${loc.city}, ${loc.state}`}
+              {loc.villaName ? `${loc.villaName}` : `${loc.city}, ${loc.state}`}
             </span>
           </div>
           {!loc.villaName && (

@@ -10,6 +10,7 @@ const Footer = () => {
 
   const quickLinks = [
     { text: 'Home', link: '/' },
+    { text: 'Exclusive Villas', link: '/exclusive'},
     { text: 'Explore Villas', link: '/explore' },
     { text: 'List Your Property', link: '/list' },
     { text: 'Customer Support', link: '/chat' },
