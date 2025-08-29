@@ -108,7 +108,7 @@ const ContactSection = () => {
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-12 h-12 bg-gradient-to-br from-green-900 to-green-900 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <item.icon className="w-6 h-6 text-white" />
                         </div>
                       </div>
@@ -130,29 +130,29 @@ const ContactSection = () => {
             </div>
 
             {/* Additional Info */}
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-green-50 to-green-100">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-green-900 to-green-900">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <MessageCircle className="w-6 h-6 text-green-600" />
-                  <h3 className="text-xl font-semibold text-gray-900">
+                  <MessageCircle className="w-6 h-6 text-white" />
+                  <h3 className="text-xl font-semibold text-white">
                     Why Contact Us?
                   </h3>
                 </div>
-                <ul className="space-y-2 text-gray-700">
+                <ul className="space-y-2 text-white">
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    <span className="w-2 h-2 bg-white rounded-full"></span>
                     <span>Personalized villa recommendations</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    <span className="w-2 h-2 bg-white rounded-full"></span>
                     <span>Special deals and exclusive offers</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    <span className="w-2 h-2 bg-white rounded-full"></span>
                     <span>24/7 booking assistance</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    <span className="w-2 h-2 bg-white rounded-full"></span>
                     <span>Travel planning and concierge services</span>
                   </li>
                 </ul>
@@ -262,8 +262,8 @@ const ContactSection = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-4 px-6 rounded-lg 
-              hover:from-green-500 hover:to-green-700 transform hover:scale-105 transition-all duration-300 
+                    className={`w-full bg-gradient-to-r from-green-900 to-green-900 text-white font-semibold py-4 px-6 rounded-lg 
+              hover:from-green-900 hover:to-green-900 transform hover:scale-105 transition-all duration-300 
               flex items-center justify-center space-x-2 ${
                 loading ? "opacity-70 cursor-not-allowed" : ""
               }`}
@@ -301,7 +301,7 @@ const ContactSection = () => {
                     By submitting this form, you agree to our{" "}
                     <a
                       href="/privacy-policy"
-                      className="text-green-600 hover:text-green-700 font-medium"
+                      className="text-green-900 hover:text-green-900 font-medium"
                     >
                       Privacy Policy
                     </a>
