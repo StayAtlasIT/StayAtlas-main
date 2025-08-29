@@ -495,40 +495,32 @@ const handleSearch = () => {
   setShowCheckInCalendar(false);
   setShowCheckOutCalendar(false);
 
-  // Choose location priority: Desktop > Mobile
   let location = locationDesktop || locationMobile || "";
+  location = location.trim();
 
-  // Safe trim aur villaName split
-  const parts = location.split("-");
-  if (parts.length > 1) {
-    // Villa Name + City/State ko ek clean string me combine karo
-    location = `${parts[0].trim()} ${parts[1].trim()}`;
-  } else {
-    location = location.trim();
-  }
-
-  // Total guests calculation (minimum 1)
   const totalGuests = (guests?.adults || 0) + (guests?.children || 0) || 1;
-
-  // Convert dates to ISO format so backend can parse
   const startISO = checkIn ? new Date(checkIn).toISOString() : "";
   const endISO = checkOut ? new Date(checkOut).toISOString() : "";
 
-  // If a remote suggestion with villa id was selected, navigate directly to its detail page
-  const selectedRemote = remoteSuggestions.find(s => {
-    if (!location) return false;
-    const candidate = s.villaName ? `${s.villaName}` : `${s.city}, ${s.state}`;
+  // 1️⃣ Check if villa name exists in remoteSuggestions
+  const selectedVilla = remoteSuggestions.find(s => {
+    const candidate = s.villaName 
+      ? `${s.villaName}` 
+      : `${s.city}, ${s.state}`;
     return candidate.toLowerCase() === location.toLowerCase();
   });
 
-  // NOTE: Do not hard-redirect to detail; allow Search page to list by name
+  if (selectedVilla?.id) {
+    // Directly navigate to villa details page
+    navigate(`/booking/${selectedVilla.id}`);
+    return;
+  }
 
-  // Navigate to search page with query params
+  // 2️⃣ Otherwise → search by city/state
   navigate(
     `/search?location=${encodeURIComponent(location)}&start=${encodeURIComponent(startISO)}&end=${encodeURIComponent(endISO)}&guests=${totalGuests}&rooms=${guests?.rooms || 1}`
   );
 };
-
 
 
   // Click outside handler for all dropdowns/popovers
@@ -1326,25 +1318,25 @@ const handleSearch = () => {
  >
 
     {/* ===== Near Me ===== */}
-    <div
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition((pos) => {
-          const { latitude, longitude } = pos.coords;
-          console.log("📍 Current location:", latitude, longitude);
-          handleSelectLocationDesktop({
-            city: "Near Me",
-            state: `Lat: ${latitude.toFixed(2)}, Lng: ${longitude.toFixed(2)}`
-          });
-        });
-      }}
-      className="px-4 py-2 cursor-pointer hover:bg-emerald-50 border-b border-emerald-100 flex items-center gap-2"
-    >
-      <MapPin className="h-4 w-4 text-emerald-600" />
-      <span className="text-gray-700 font-medium text-sm">Near Me</span>
-    </div>
+<div
+  onClick={() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
+      console.log("📍 Current location:", latitude, longitude);
+      handleSelectLocationMobile({
+        city: "Near Me",
+        state: `Lat: ${latitude.toFixed(2)}, Lng: ${longitude.toFixed(2)}`
+      });
+    });
+  }}
+  className="px-4 py-2 cursor-pointer hover:bg-emerald-50 border-b border-emerald-100 flex items-center gap-2"
+>
+  <MapPin className="h-4 w-4 text-emerald-600" />
+  <span className="text-gray-700 font-medium text-sm">Near Me</span>
+</div>
 
-    {/* ===== Recent Searches ===== */}
-    {recentSearches.length > 0 && (
+{/* ===== Recent Searches ===== */}
+{recentSearches.length > 0 && (
   <div className="mt-2 border-b border-emerald-100">
     <h3 className="text-sm font-semibold text-gray-400 mb-1 ml-4">Recent Searches</h3>
     <ul>
@@ -1355,10 +1347,12 @@ const handleSearch = () => {
         >
           <div
             className="flex items-center gap-2"
-            onClick={() => handleSelectLocationDesktop(loc)}
+            onClick={() => handleSelectLocationMobile(loc)}
           >
             <MapPin className="h-4 w-4 text-emerald-600 ml-2" />
-            <span className="text-gray-700 font-medium text-sm">{loc.city}</span>
+            <span className="text-gray-700 font-medium text-sm">
+              {loc.villaName ? loc.villaName : loc.city}
+            </span>
             <span className="text-gray-500 text-xs">{loc.state}</span>
           </div>
           <button
@@ -1378,35 +1372,37 @@ const handleSearch = () => {
   </div>
 )}
 
-
-    {/* ===== Filtered Locations ===== */}
-    {filteredLocationsMobile.length > 0 && (
+{/* ===== Filtered Locations ===== */}
+{filteredLocationsMobile.length > 0 && (
   <div>
-    <div className="px-3 py-1 text-xs text-gray-400 font-semibold">
+    <div className="px-4 py-2 text-sm text-gray-400 font-semibold">
       Search More
     </div>
     {filteredLocationsMobile.map((loc, idx) => (
       <div
         key={`search-${idx}`}
-          onMouseDown={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              }}
-            onClick={() => handleSelectLocationMobile(loc)}
-            className="px-3 py-1 cursor-pointer hover:bg-emerald-50 border-b border-emerald-100 flex justify-between"
-          >
-            <div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-3 w-3 text-emerald-600" />
-                <span className="text-gray-700 text-xs font-medium">{loc.city}</span>
-              </div>
-              <span className="text-gray-500 text-[10px] ml-5">{loc.state}</span>
-            </div>
-            <span className="text-gray-400 text-xs">City</span>
+        onClick={() => handleSelectLocationMobile(loc)}
+        className="px-4 py-1 cursor-pointer hover:bg-emerald-50 border-b border-emerald-100 flex justify-between"
+      >
+        <div>
+          <div className="flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-emerald-600" />
+            <span className="text-gray-700 text-sm font-medium">
+              {loc.villaName ? `${loc.villaName}` : `${loc.city}, ${loc.state}`}
+            </span>
           </div>
-        ))}
+          {!loc.villaName && (
+            <span className="text-gray-500 text-xs ml-6">{loc.state}</span>
+          )}
+        </div>
+        <span className="text-gray-400 text-sm">
+          {loc.villaName ? "Villa" : "City"}
+        </span>
       </div>
-    )}
+    ))}
+  </div>
+)}
+
   </div>
 )}
 
