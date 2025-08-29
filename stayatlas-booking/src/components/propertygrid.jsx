@@ -20,6 +20,9 @@ export default function PropertyListingGrid({
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  
+
+
   // Fetch liked villas from backend
   const fetchLikedVillas = async () => {
     const token = localStorage.getItem("token");
