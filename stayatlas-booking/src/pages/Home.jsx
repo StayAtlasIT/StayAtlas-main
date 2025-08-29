@@ -119,33 +119,10 @@ const Home = () => {
                     </button>
                   </div>
 
-                  {/* Navigation Arrows + Dots */}
-                  <div className="flex items-center gap-4 mt-6 justify-center lg:justify-start">
-                    <button 
-                      onClick={() => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 transform hover:scale-110 border border-white/30"
-                    >
-                      <span className="text-white text-lg">←</span>
-                    </button>
-                    <div className="flex gap-2">
-                      {heroImages.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentSlide(index)}
-                          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                            index === currentSlide ? 'bg-amber-400 scale-125' : 'bg-white/50'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <button 
-                      onClick={() => setCurrentSlide((prev) => (prev + 1) % heroImages.length)}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 transform hover:scale-110 border border-white/30"
-                    >
-                      <span className="text-white text-lg">→</span>
-                    </button>
-                  </div>
                 </div>
+
+                {/* Right Floating Images */}
+                
               </div>
 
               {/* Search Bar placement */}

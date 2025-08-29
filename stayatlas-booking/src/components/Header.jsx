@@ -144,7 +144,7 @@ const Header = () => {
             <>
               <button
                 onClick={handleListPropertyClick}
-                className="bg-[#2563eb] text-white font-semibold px-4 py-2 rounded-md border border-black hover:bg-[#1d4ed8] transition-colors duration-200"
+                className="bg-[#002b20] text-white font-semibold px-4 py-2 rounded-md border border-black hover:bg-[#002b20] duration-200 transform hover:scale-105 transition-all"
               >
                 List Your Property
               </button>
@@ -187,7 +187,7 @@ const Header = () => {
             <>
               <button
                 onClick={handleListPropertyClick}
-                className="bg-[#2563eb] text-white font-semibold px-4 py-2 rounded-md border border-black hover:bg-[#1d4ed8] transition-colors duration-200"
+                className="bg-[#002b20] text-white font-semibold px-4 py-2 rounded-md border border-black hover:bg-[#002b20] transition-colors duration-200"
               >
                 List Your Property
               </button>
