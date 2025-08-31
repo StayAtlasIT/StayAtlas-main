@@ -67,7 +67,16 @@ const Home = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative w-full min-h-[80vh] overflow-visible" ref={heroRef}>
+      {/* <div className="relative w-full min-h-[80vh] overflow-visible" ref={heroRef}> */}
+      {/* <div className="relative mx-auto min-h-[80vh] overflow-visible" style={{ maxWidth: "1600px" }} ref={heroRef}> */}
+      {/* Hero Section */}
+<div
+  className="relative mx-auto min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh] overflow-visible"
+  style={{ maxWidth: "1600px" }}
+  ref={heroRef}
+>
+
+
         {/* Background Slideshow */}
         <div className="absolute inset-0 min-h-full">
           {heroImages.map((image, index) => (
@@ -90,7 +99,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 min-h-full" />
 
         {/* Content */}
-        <div className="relative z-[2000] min-h-[80vh] flex flex-col justify-between pt-16 pb-10 lg:justify-center lg:pt-24 lg:pb-16">
+        <div className="relative z-[2000] min-h-[50vh] flex flex-col justify-between pt-16 pb-10 lg:justify-center lg:pt-24 lg:pb-16">
           <div className="flex flex-col justify-start px-4 sm:px-8 lg:px-20 h-full">
             <div className="max-w-screen-2xl mx-auto w-full flex flex-col h-full">
               <div className="grid lg:grid-cols-2 gap-8 items-start pt-20 lg:pt-0">
@@ -126,23 +135,32 @@ const Home = () => {
               </div>
 
               {/* Search Bar placement */}
-              <div className="col-span-full mt-auto mb-20 lg:mt-10 lg:mb-12 relative z-50">
+              {/* <div className="col-span-full mt-auto mb-10 lg:mt-10 lg:mb-12 relative z-50">
                 <SearchForm />
-              </div>
+              </div> */}
+              <div
+  className="
+    absolute left-1/2 transform -translate-x-1/2 
+    bottom-[-2rem] sm:bottom-[-2.5rem] md:bottom-[-3rem] lg:bottom-[-13rem] 
+    w-full max-w-7xl px-4 z-[3000]
+  "
+>
+  <SearchForm />
+</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Other Sections remain same */}
-      <div className="mx-auto w-full max-w-screen-2xl p-6">
+      <div className="mx-auto w-full max-w-screen-2xl p-6 pt-24">
         <EnhancedVillaCards />
         <HorizontalVillas />
         <PopularDestination/>
         <OffersSection />
-        <AvailableThisWeekends/>     
+        <AvailableThisWeekends/>  
+         <WhyChooseAtlas />   
       </div>
-      <WhyChooseAtlas />
       <div className='bg-gray-50'><Testimonials /></div>
       <div className='bg-gray-50'><FAQ /></div>
       <div id="contact-us-section" className='bg-green-50'><ContactSection/></div>

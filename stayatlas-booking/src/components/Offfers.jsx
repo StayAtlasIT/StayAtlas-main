@@ -65,9 +65,9 @@ const OffersSection = () => {
           <div className="w-full h-full bg-white rounded-full transform translate-x-8 -translate-y-8" />
         </div>
         <div className="flex items-center mb-4 z-10">
-          <div className="p-2 bg-white bg-opacity-20 rounded-lg mr-3">
-            {ICONS_MAP[offer.icon] || <FaPlane />}
-          </div>
+          <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm mr-3 shadow-inner">
+        {ICONS_MAP[offer.icon] || <FaPlane />}
+      </div>
           <div>
             <h3 className="text-lg font-bold">{offer.title}</h3>
             <p className="text-sm opacity-90">{offer.subtitle}</p>
@@ -109,13 +109,14 @@ const OffersSection = () => {
   );
 
   return (
-    <div className="py-12 bg-gradient-to-br from-gray-50 to-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-0 relative">
+      <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
         <div className="mb-6">
-  <h2 className="font-bold text-gray-900 whitespace-nowrap text-[30px] md:text-[28px]">
-    Offers for You
+  <h2 className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+  style={{ fontWeight: 640 }}>
+    Special Offers for You
   </h2>
-  <p className="text-gray-600">
+  <p className="text-gray-500 text-sm sm:text-base md:text-lg">
     Grab these exclusive Stay Atlas deals before they expire!
   </p>
 </div>
@@ -129,7 +130,7 @@ const OffersSection = () => {
                   onClick={() => setActiveTab(tab)}
                   className={`px-4 py-2 whitespace-nowrap rounded-md transition ${
                     activeTab === tab
-                      ? "bg-blue-500 text-white shadow"
+                      ? "bg-[#002b20] text-white shadow"
                       : "text-gray-600 hover:text-gray-800"
                   }`}
                 >

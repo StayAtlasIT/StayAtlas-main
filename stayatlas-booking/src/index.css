@@ -8,6 +8,7 @@
     --font-custom: "Montserrat", sans-serif;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
@@ -142,14 +143,16 @@ html {
     --sidebar-ring: oklch(0.556 0 0);
 }
 
-  @layer base {
+@layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
 }
+
   
 /* Show horizontal scrollbar */
 .no-scrollbar::-webkit-scrollbar {

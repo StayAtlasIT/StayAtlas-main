@@ -146,7 +146,7 @@ const Card = ({ villa }) => {
             <span className="text-xs font-normal text-gray-500 ml-1">/ night</span>
           </p>
           <button
-            className="bg-gradient-to-r from-blue-700 to-blue-900 text-white font-bold py-1.5 px-4 rounded-full text-xs md:text-sm hover:shadow-lg transition"
+            className="bg-gradient-to-r from-black to-gray-800 text-white font-bold py-1.5 px-4 rounded-full text-xs md:text-sm hover:shadow-lg transition"
             onClick={(e) => {
               e.stopPropagation();
               window.location.href = `/booking/${villa._id}`;
@@ -203,23 +203,19 @@ const AvailableThisWeekends = () => {
   };
 
   return (
-    <div className="py-10 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 relative">
+    <div className="py-18 bg-white relative">
+      <div className="max-w-7xl mx-auto px-0 relative">
         <h2
-          className="font-bold text-gray-800 mb-6 flex justify-between items-center whitespace-nowrap"
-          style={{
-            fontSize: "20px",       // mobile
-          }}
-        >
-          <span className="block md:hidden">Available This Weekend</span>
-          <span
-            className="hidden md:block"
-            style={{
-              fontSize: "28px",     // desktop & tablet
-            }}
-          >
-            Available This Weekend
-          </span>
+  className="text-gray-900 mb-6 flex justify-between items-center whitespace-nowrap"
+  style={{ fontWeight: 640 }}
+>
+  <span className="block md:hidden text-2xl">
+    Available This Weekend
+  </span>
+  <span className="hidden md:block text-3xl">
+    Available This Weekend
+  </span>
+
 
           {/* Top right arrows */}
           <div className="flex gap-3 ml-4">

@@ -188,7 +188,7 @@ function UseExclusive({ villa, nights = 1 }) {
   return (
     <div
       onClick={handleNavigation}
-      className="w-[320px] min-w-[320px] h-[420px] flex flex-col border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white relative cursor-pointer"
+      className="w-[320px] min-w-[320px] h-[400px] flex flex-col border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white relative cursor-pointer"
     >
       {/* Rating Badge */}
       <div className="absolute top-3 right-3 flex items-center gap-1 bg-white bg-opacity-90 px-2 py-1 rounded-full shadow text-[#002B20] font-semibold text-sm z-20">
@@ -199,7 +199,7 @@ function UseExclusive({ villa, nights = 1 }) {
       {/* Image Section */}
       <div className="relative w-full h-48 rounded-t-xl overflow-hidden flex-shrink-0 bg-gray-100 group">
         {safeVilla.image.length > 0 && (
-          <div className="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full z-20">
+          <div className="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full z-20 hidden group-hover:block">
             {currentImageIndex + 1} / {safeVilla.image.length}
           </div>
         )}
@@ -354,7 +354,7 @@ function UseExclusive({ villa, nights = 1 }) {
             ₹{totalPrice.toLocaleString()}
             <span className="text-sm font-normal text-gray-500 ml-1">/night</span>
           </p>
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-2 px-4 rounded-xl shadow text-sm">
+          <div className="bg-gradient-to-r from-black to-gray-800 text-white font-semibold py-2 px-4 rounded-xl shadow text-sm">
             Book Now
           </div>
         </div>

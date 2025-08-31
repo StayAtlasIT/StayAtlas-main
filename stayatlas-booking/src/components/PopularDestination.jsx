@@ -187,31 +187,31 @@ const DestinationCards = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-10">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full shadow-lg mb-6">
-            <MapPin className="w-6 h-6 text-white" />
-          </div>
-          <h2 
-            className="font-bold text-gray-900 mb-6"
-            style={{
-              fontSize: isMobile ? "24px" : isTablet ? "36px" : "48px",
-              whiteSpace: isMobile ? "nowrap" : "normal",
-              overflow: "hidden",
-              textOverflow: "ellipsis"
-            }}
-          >
-            Popular Destinations
-          </h2>
-          <p
-            className="text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            style={{ fontSize: isMobile ? "14px" : "18px" }}
-          >
-            Explore our most sought-after locations, each offering unique experiences and unforgettable memories
-          </p>
-        </div>
+        <div className="flex items-center gap-4 mb-1">
+  {/* Icon Circle */}
+  {/* <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-emerald-800 to-emerald-700 rounded-full shadow-lg">
+    <MapPin className="w-6 h-6 text-white" />
+  </div> */}
+
+  {/* Heading */}
+  <h2
+    className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+    style={{ fontWeight: 640 }}
+  >
+    Popular Destinations
+  </h2>
+</div>
+
+{/* Paragraph */}
+<p className="text-gray-500 max-w-4xl leading-relaxed text-sm sm:text-base md:text-lg mb-6">
+  Explore our most sought-after locations, each offering unique experiences
+  and unforgettable memories.
+</p>
+
+
 
         {/* Villas */}
         {popularVillas.length === 0 ? (

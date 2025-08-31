@@ -37,12 +37,15 @@ const HorizontalVillas = () => {
       {villas.length === 0 ? (
         <p className="text-center text-gray-500 text-lg mt-10">No villas found.</p>
       ) : (
-         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-0">
+         <div className="max-w-screen-xl mx-auto sm:px-0 lg:px-0">
           <div className="flex items-center justify-between mb-6">
-  <h2 className="font-bold text-gray-900 whitespace-nowrap 
-               text-2xl sm:text-3xl md:text-4xl">
+<h2
+  className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+  style={{ fontWeight: 640 }}
+>
   Trending Properties
 </h2>
+
   <div className="flex gap-2">
     <button
       onClick={() => scroll('left')}
