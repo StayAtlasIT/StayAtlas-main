@@ -55,16 +55,23 @@ const FAQ = () => {
   const visibleFaqs = showAll ? faqs : faqs.slice(0, 4);
 
   return (
-    <section className="py-20  transition-shadow duration-300 rounded-xl">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="py-6  transition-shadow duration-300 rounded-xl">
+      <div className="max-w-4xl mx-auto px-0">
         {/* Header */}
-        <div className="text-center mb-16 p-6 rounded-lg backdrop-blur-sm">
-          <h2 className="font-serif text-3xl sm:text-4xl font-black">
-            Frequently Asked Questions
-          </h2>
-          <p className="mt-2 text-gray-600">
-            Find answers to common questions about booking and staying with StayAtlas
-          </p>
+        <div className="text-center mb-2 p-6 rounded-lg backdrop-blur-sm">
+         {/* Heading */}
+<h2
+  className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+  style={{ fontWeight: 640 }}
+>
+  Frequently Asked Questions
+</h2>
+
+{/* Paragraph */}
+<p className="text-gray-500 max-w-4xl leading-relaxed text-sm sm:text-base md:text-lg mb-6 mx-auto">
+  Find answers to common questions about booking and staying with StayAtlas.
+</p>
+
         </div>
 
         {/* FAQ Accordion */}

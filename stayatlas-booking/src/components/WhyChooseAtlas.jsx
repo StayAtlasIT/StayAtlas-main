@@ -50,26 +50,24 @@ const WhyChooseAtlas = () => {
   ];
 
   return (
-    <section className="py-12 md:py-25 ">
+    <section className="py-12 md:py-10 ">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-14">
-          <h2
-            className="font-bold text-gray-800 mb-3 bg-gradient-to-r from-green-900 via-green-900 to-green-900 bg-clip-text text-transparent"
-            style={{ fontSize: "28px" }} // mobile font size
-          >
-            <span className="block md:hidden">Why Choose StayAtlas</span>
-            <span
-              className="hidden md:block"
-              style={{ fontSize: "39px" }} // desktop & tablet font size
-            >
-              Why Choose StayAtlas
-            </span>
-          </h2>
-          <p className="text-base md:text-md text-gray-600 max-w-2xl mx-auto">
-            We're committed to providing exceptional villa rental experiences with unmatched service, 
-            verified properties, and personalized attention to every detail of your stay.
-          </p>
+          {/* Heading */}
+<h2
+  className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+  style={{ fontWeight: 640 }}
+>
+  Why Choose StayAtlas
+</h2>
+
+{/* Paragraph */}
+<p className="text-gray-500 max-w-4xl leading-relaxed text-sm sm:text-base md:text-lg mb-6 mx-auto">
+  We're committed to providing exceptional villa rental experiences with unmatched service, 
+  verified properties, and personalized attention to every detail of your stay.
+</p>
+
         </div>
 
         {/* Features Grid */}

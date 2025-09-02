@@ -266,7 +266,7 @@ function UseExclusive({ villa, nights = 1 }) {
                       "https://images.unsplash.com/photo-1580587771525-78b9dba3b914";
                   }}
                 />
-              </div>
+              </div>                      
             ))
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-100">

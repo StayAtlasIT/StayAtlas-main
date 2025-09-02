@@ -92,19 +92,28 @@ const Testimonials = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-12 bg-gradient-to-br from-gray-50 via-white to-purple-50">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-6">
+      <div className="max-w-6xl mx-auto px-0">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-900 to-green-900 rounded-full mb-4">
-            <Quote className="w-6 h-6 text-white" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            What Our Guests Say
-          </h2>
-          <p className="text-md text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Real experiences from real guests who have stayed at our carefully curated villas
-          </p>
+        <div className="text-center mb-8">
+          {/* Icon */}
+<div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-green-900 to-green-900 rounded-full mb-4">
+  <Quote className="w-6 h-6 text-white" />
+</div>
+
+{/* Heading */}
+<h2
+  className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+  style={{ fontWeight: 640 }}
+>
+  What Our Guests Say
+</h2>
+
+{/* Paragraph */}
+<p className="text-gray-500 max-w-4xl leading-relaxed text-sm sm:text-base md:text-lg mb-6 mx-auto">
+  Real experiences from real guests who have stayed at our carefully curated villas.
+</p>
+
         </div>
 
         {/* Animated Testimonial */}

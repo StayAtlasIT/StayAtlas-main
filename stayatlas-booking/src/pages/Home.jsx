@@ -159,11 +159,11 @@ const Home = () => {
         <PopularDestination/>
         <OffersSection />
         <AvailableThisWeekends/>  
-         <WhyChooseAtlas />   
+        <Testimonials />
+        <FAQ />
+        <WhyChooseAtlas />  
       </div>
-      <div className='bg-gray-50'><Testimonials /></div>
-      <div className='bg-gray-50'><FAQ /></div>
-      <div id="contact-us-section" className='bg-green-50'><ContactSection/></div>
+      <div id="contact-us-section"><ContactSection/></div>
     </>
   );
 };

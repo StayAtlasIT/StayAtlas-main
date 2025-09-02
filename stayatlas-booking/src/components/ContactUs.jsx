@@ -82,18 +82,24 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <section className="py-16 md:py-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Get In Touch
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to book your dream villa? Our team is here to help you find
-            the perfect getaway. Reach out to us and let's make your vacation
-            dreams come true.
-          </p>
+          {/* Heading */}
+<h2
+  className="text-gray-900 whitespace-nowrap text-2xl sm:text-3xl md:text-3xl"
+  style={{ fontWeight: 640 }}
+>
+  Get In Touch
+</h2>
+
+{/* Paragraph */}
+<p className="text-gray-500 max-w-4xl leading-relaxed text-sm sm:text-base md:text-lg mb-6 mx-auto">
+  Ready to book your dream villa? Our team is here to help you find the perfect getaway. 
+  Reach out to us and let's make your vacation dreams come true.
+</p>
+
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -165,13 +171,19 @@ const ContactSection = () => {
             <Card className="border-0 shadow-xl bg-white/95 backdrop-blur-sm">
               <CardContent className="p-8">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Send us a Message
-                  </h3>
-                  <p className="text-gray-600">
-                    Fill out the form below and we'll get back to you within 2
-                    hours.
-                  </p>
+                 {/* Heading */}
+<h3
+  className="text-gray-900 whitespace-nowrap text-2xl sm:text-2xl md:text-2xl"
+  style={{ fontWeight: 640 }}
+>
+  Send us a Message
+</h3>
+
+{/* Paragraph */}
+<p className="text-gray-500 max-w-4xl leading-relaxed text-base sm:text-base md:text-base mb-6 mx-auto">
+  Fill out the form below and we'll get back to you within 2 hours.
+</p>
+
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
