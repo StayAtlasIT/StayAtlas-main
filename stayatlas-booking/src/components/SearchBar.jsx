@@ -1324,6 +1324,7 @@ const handleSearch = () => {
   <div
    className="absolute top-full left-0 mt-2 w-full bg-white border-2 border-emerald-200 rounded-lg shadow-2xl z-[5000] max-h-[60vh] overflow-y-auto"
    onClick={(e) => e.stopPropagation()}
+   onMouseDown={(e) => e.stopPropagation()}
  >
 
     {/* ===== Near Me ===== */}
