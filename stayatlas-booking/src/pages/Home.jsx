@@ -140,7 +140,7 @@ const Home = () => {
         <div
   className="
     absolute left-1/2 transform -translate-x-1/2
-    bottom-[-2rem] sm:bottom-[-3rem] md:bottom-[-4rem] lg:bottom-[-14rem]
+    bottom-[-2.5rem] sm:bottom-[-3rem] md:bottom-[-4rem] lg:bottom-[-14rem]
     w-full max-w-[95%] sm:max-w-7xl px-2 z-[3000]
     search-overlap
   "
