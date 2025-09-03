@@ -87,7 +87,7 @@ const Header = () => {
   }, [isMobileDropdownOpen]);
 
   return (
-    <header className="bg-[#002b20] sticky top-0 shadow-md z-[9999]">
+    <header className="bg-black sticky top-0 shadow-md z-[9999]">
       <div className="max-w-screen-2xl mx-auto flex justify-between items-center py-2 px-6 md:px-20">
         {/* Logo */}
         <div
