@@ -140,7 +140,7 @@ const verifyAndBook = asyncHandler(async (req, res) => {
                 paymentStatus: "paid",
                 isPaid: true,
                 paidAt: new Date(),
-                status: "Confirmed",
+                status: "pending",
                 $inc: { paymentAttempts: 1 }
             },
             { new: true }
