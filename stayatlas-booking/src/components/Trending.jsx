@@ -33,7 +33,7 @@ const HorizontalVillas = () => {
   };
 
   return (
-    <div className="bg-white py-6">
+    <div className="bg-white md:py-14 -mt-6">
       {villas.length === 0 ? (
         <p className="text-center text-gray-500 text-lg mt-10">No villas found.</p>
       ) : (

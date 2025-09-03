@@ -1271,10 +1271,19 @@ const handleSearch = () => {
               style={{boxSizing: 'border-box'}}
             >
               <Search className="text-emerald-600" size={20} />
-              <span className="text-sm text-gray-700 flex-1">Where to? | Add dates | Guests</span>
-              <button className="ml-auto bg-emerald-600 text-white px-3 py-2 rounded-full">
-                <Search size={16} />
-              </button>
+              <span className="text-xs sm:text-sm text-gray-700 flex-1 truncate">
+  Where to? | Add dates | Guests
+</span>
+<button
+  className="
+    ml-auto bg-emerald-600 text-white 
+    px-2.5 py-1.5 sm:px-3 sm:py-2 
+    rounded-full
+  "
+>
+  <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+</button>
+
             </motion.div>
           ) : (
             <motion.div
