@@ -5,6 +5,10 @@ import {
   FaChevronRight,
   FaTimes,
 } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 export default function Gallery({ photos = [] }) {
   const normalizedPhotos = photos.map((photo) =>
@@ -77,29 +81,64 @@ export default function Gallery({ photos = [] }) {
   }, [isImageViewerOpen]);
 
   return (
-    <div className="bg-white py-5 px-1">
+    <div className="bg-white py-2 px-1">
       {/* Mobile View */}
-      <div className="block md:hidden">
-        <div
-          className="relative overflow-hidden rounded-lg cursor-pointer"
-          onClick={() => openListModal()}
-        >
-          <img
-            src={photos[0]}
-            alt="Main Image"
-            className="w-full h-100 object-cover"
-          />
-          <button
+   <div className="block md:hidden">
+  <div className="relative overflow-hidden rounded-lg">
+    <Swiper
+      spaceBetween={10}
+      slidesPerView={1}
+      modules={[Pagination]}
+      onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
+    >
+      {photos.map((photo, index) => (
+        <SwiperSlide key={index}>
+          <div
+            className="relative cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               openListModal();
             }}
-            className="absolute left-4 bottom-4 bg-white text-gray-700 px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-100 transition-all duration-200"
           >
-            <FaImage /> View Photos
-          </button>
-        </div>
-      </div>
+            <img
+              src={photo}
+              alt={`Photo ${index + 1}`}
+              className="w-full object-cover rounded-lg
+                         h-[280px] sm:h-[320px] md:h-[400px]"  // 📱 iPhone / choti screen ke liye chhoti height
+            />
+
+            {/* Counter (Right Corner) */}
+            {index === currentIndex && (
+  <div className="absolute bottom-4 right-3 
+                  bg-black/60 backdrop-blur-md text-white text-sm 
+                  px-2 py-1 rounded-md flex items-center gap-1 shadow-md">
+    <FaImage size={14} />
+    {currentIndex + 1} / {photos.length}
+  </div>
+)}
+
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+
+    {/* Custom 3 Dot Pagination */}
+    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2">
+      {[0, 1, 2].map((dotIndex) => {
+        // calculate relative active dot (always keep middle active)
+        const isActive = dotIndex === 1; // hamesha beech vala active
+        return (
+          <span
+            key={dotIndex}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              isActive ? "bg-white scale-125" : "bg-white/50"
+            }`}
+          />
+        );
+      })}
+    </div>
+  </div>
+</div>
 
       {/* Desktop View */}
       <div className="hidden md:flex justify-center">

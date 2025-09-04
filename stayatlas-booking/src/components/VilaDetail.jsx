@@ -175,15 +175,20 @@ const VilaDetail = ({ property = null }) => {
       <div className="flex flex-col md:flex-row gap-6 w-[95%] mx-auto max-w-[1600px] xl:max-w-7xl">
         <div className="md:w-2/3 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold">{property.villaName}</h1>
-            <p className="text-lg">{`${property?.address?.city}, ${property?.address?.country}`}</p>
-          </div>
+  {/* Villa Name + City/Country */}
+  <h1 className="text-2xl sm:text-3xl font-bold">{property.villaName}</h1>
+  <p className="text-base sm:text-lg text-gray-700">
+    {`${property?.address?.city}, ${property?.address?.country}`}
+  </p>
+</div>
 
-          <div>
-            <p className="text-sm">
-              {`${property?.address?.street}, ${property?.address?.city}, ${property?.address?.state}, ${property?.address?.country}, ${property?.address?.zipcode}`}
-            </p>
-
+{/* Full Address */}
+<div className="-mt-3">
+  <p className="text-sm text-gray-600 leading-snug break-words">
+    {`${property?.address?.street}, ${property?.address?.city}, ${property?.address?.state}, ${property?.address?.country}, ${property?.address?.zipcode}`}
+  </p>
+</div>
+<div>
             {(() => {
               if (!data || !data.villa || !data.villa._id) {
                 return (
@@ -206,7 +211,7 @@ const VilaDetail = ({ property = null }) => {
               return (
                 <a
                   href="#reviews"
-                  className="flex mt-1 items-center gap-1 text-yellow-500 text-sm font-medium cursor-pointer hover:underline"
+                  className="flex -mt-3 items-center gap-1 text-yellow-500 text-sm font-medium cursor-pointer hover:underline"
                 >
                   <span className="text-base font-semibold text-yellow-500">
                     {averageRating.toFixed(1)}
@@ -226,19 +231,24 @@ const VilaDetail = ({ property = null }) => {
             })()}
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2 border px-3 py-1 rounded-full text-sm">
-              <FaHouse /> {property.numberOfRooms} BHK
-            </div>
-            <div className="flex items-center gap-2 border px-3 py-1 rounded-full text-sm">
-              <FaPersonWalkingLuggage /> {property.guestCapacity || (property.numberOfRooms * 2)} MAX GUEST
-            </div>
-            <div className="flex items-center gap-2 border px-3 py-1 rounded-full text-sm">
-              <DoorClosed /> {property.numberOfBathrooms || 0} Bathrooms
-            </div>
-          </div>
+         <div className="flex flex-wrap gap-1.5 sm:gap-3">
+  <div className="flex items-center gap-1 border px-2 py-0.5 rounded-full text-[10px] xs:text-sm sm:text-sm">
+    <FaHouse className="w-4 h-4 sm:w-4 sm:h-4" /> 
+    {property.numberOfRooms} BHK
+  </div>
+  <div className="flex items-center gap-1 border px-2 py-0.5 rounded-full text-[10px] xs:text-sm sm:text-sm">
+    <FaPersonWalkingLuggage className="w-4 h-4 sm:w-4 sm:h-4" /> 
+    {property.guestCapacity || property.numberOfRooms * 2} MAX GUEST
+  </div>
+  <div className="flex items-center gap-1 border px-2 py-0.5 rounded-full text-[10px] xs:text-sm sm:text-sm">
+    <DoorClosed className="w-4 h-4 sm:w-4 sm:h-4" /> 
+    {property.numberOfBathrooms || 0} Bathrooms
+  </div>
+</div>
 
-          <div className="max-w-4xl mx-auto mt-14">
+
+
+          <div className="max-w-4xl mx-auto mt-12">
             <h2 className="text-2xl font-bold mb-4 border-l-4 border-orange-500 pl-4 text-gray-800">
               Property Description
             </h2>
