@@ -89,23 +89,24 @@ const DestinationCard = ({ destination, isHovered, onHover, onLeave, isMobile, i
           {destination.rating}
         </div>
 
-        <div className="flex items-center gap-2 mb-2 opacity-90">
-          <MapPin className="w-3 h-3" />
-          <span className="text-sm">{destination.location}</span>
-        </div>
+        <h3 className="font-bold" style={{ fontSize: getFontSizes().title }}>
+  {destination.name}
+</h3>
 
-        <h3 className="font-bold mb-2" style={{ fontSize: getFontSizes().title }}>
-          {destination.name}
-        </h3>
+<div className="flex items-center gap-1 opacity-80">
+  <MapPin className="w-3 h-3" />
+  <span className="text-xs">{destination.location}</span>
+</div>
 
-        <p className="mb-3 opacity-90" style={{ fontSize: getFontSizes().description }}>
+
+        <p className="mb-3 mt-2 opacity-90" style={{ fontSize: getFontSizes().description }}>
           {destination.description
             ?.split(" ")
             .slice(0, 13)
             .join(" ") + (destination.description?.split(" ").length > 15 ? "..." : "")}
         </p>
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        {/* <div className="flex flex-wrap gap-2 mb-4">
           {destination.amenities?.slice(0, 3).map((a, i) => (
             <span
               key={i}
@@ -124,7 +125,7 @@ const DestinationCard = ({ destination, isHovered, onHover, onLeave, isMobile, i
               +{destination.amenities.length - 3} more
             </span>
           )}
-        </div>
+        </div> */}
 
         <div className="flex items-center justify-between">
           <div className="text-lg font-bold">{destination.price}</div>

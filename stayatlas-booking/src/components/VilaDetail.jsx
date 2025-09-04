@@ -32,6 +32,7 @@ import {
   convertVimeoLink,
   convertDriveLink,
 } from "../utils/convertVideoUrl";
+import { Link } from "react-router-dom";
 import BookingCard from "./BookingCard"; // Import the new component
 
 const amenityIcons = {
@@ -431,25 +432,18 @@ const VilaDetail = ({ property = null }) => {
             </div>
 
             <div className="flex flex-wrap gap-4 mt-6 sm:flex-row flex-col">
-              <a
-                href="/Refund & Cancellation Policy.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="w-full sm:w-auto px-4 py-2 rounded-md bg-gray-100 text-gray-800 shadow-sm hover:bg-gray-200 transition">
-                  Refund Policy
-                </button>
-              </a>
-              <a
-                href="/StayAtlas T&C Policy.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="w-full sm:w-auto px-4 py-2 rounded-md bg-gray-100 text-gray-800 shadow-sm hover:bg-gray-200 transition">
-                  Home Rules and Policy
-                </button>
-              </a>
-            </div>
+  <Link to="/cancellation-policy">
+    <button className="w-full sm:w-auto px-4 py-2 rounded-md bg-gray-100 text-gray-800 shadow-sm hover:bg-gray-200 transition">
+      Refund Policy
+    </button>
+  </Link>
+
+  <Link to="/terms-and-conditions">
+    <button className="w-full sm:w-auto px-4 py-2 rounded-md bg-gray-100 text-gray-800 shadow-sm hover:bg-gray-200 transition">
+      Home Rules and Policy
+    </button>
+  </Link>
+</div>
 
             <div className="mt-6 text-sm text-gray-700">
               Check-in time: <span className="font-bold">1PM</span> , Check-out

@@ -336,7 +336,7 @@ const BookingCard = ({ property }) => {
   return (
     <div className="w-full lg:w-[500px] relative">
       <div className="lg:sticky lg:top-24">
-        <div className="space-y-6 p-6 shadow-xl rounded-2xl text-sm w-full border border-gray-200 bg-gradient-to-br from-green-50 via-yellow-50 to-white ring-1 ring-green-100 transition-all duration-300 ease-in-out">
+        <div className="space-y-6 p-6 shadow-xl rounded-2xl text-sm w-full border border-gray-100 bg-gradient-to-br from-green-50 via-yellow-30 to-white ring-1 ring-green-100 transition-all duration-300 ease-in-out">
           {/* Price */}
           <div className="text-[22px] font-extrabold text-gray-900">
             ₹
