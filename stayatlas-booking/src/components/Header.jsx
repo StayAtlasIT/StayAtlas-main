@@ -18,12 +18,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import axios from "../utils/axios";
 import toast from "react-hot-toast";
 
+// 👇 import AuthModal
+import AuthModal from "./AuthModal";
+
 const Header = () => {
   const match = useMatch("/viewExclusive/:id");
   const { isLoggedIn, firstName } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false); // modal state
+  const [authView, setAuthView] = useState("login"); // login / signup
+
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -33,7 +39,8 @@ const Header = () => {
       if (response.data.statusCode === 200) {
         toast.success("Logout successful");
         dispatch(logout());
-        navigate("/login");
+        setAuthOpen(false);
+        navigate("/");
       } else {
         toast.error("Logout failed. Please try again.");
       }
@@ -73,7 +80,7 @@ const Header = () => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target) &&
-        !event.target.closest("#mobile-menu-button") // prevent closing when clicking hamburger
+        !event.target.closest("#mobile-menu-button")
       ) {
         setIsMobileDropdownOpen(false);
       }
@@ -192,7 +199,10 @@ const Header = () => {
                 List Your Property
               </button>
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => {
+                  setAuthView("login");
+                  setAuthOpen(true);
+                }}
                 className="bg-white border border-black text-black font-semibold px-4 py-2 rounded-md hover:bg-[#22c55e] hover:text-white transition-colors duration-200"
               >
                 Login/Signup
@@ -290,7 +300,8 @@ const Header = () => {
           ) : (
             <span
               onClick={() => {
-                navigate("/login");
+                setAuthView("login");
+                setAuthOpen(true);
                 setIsMobileDropdownOpen(false);
               }}
               className="text-lg font-medium text-white hover:text-[#2563eb] cursor-pointer transition-colors"
@@ -300,6 +311,13 @@ const Header = () => {
           )}
         </div>
       </div>
+
+      {/* 👇 Auth Modal render */}
+      <AuthModal
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+        defaultView={authView}
+      />
     </header>
   );
 };
